@@ -10,8 +10,9 @@ This project is based on:
 
 ## Propel Behavior
 
-[![build status](http://gitlab.cybble.dev:8081/api/propel-behavior/badges/master/build.svg)](http://gitlab.cybble.dev:8081/api/propel-behavior/commits/master)
-[![coverage report](http://gitlab.cybble.dev:8081/api/propel-behavior/badges/master/coverage.svg)](http://gitlab.cybble.dev:8081/api/propel-behavior/commits/master)
+[![Build Status](https://travis-ci.org/wollanup/php-api-rest-propel-behavior.svg?branch=master)](https://travis-ci.org/wollanup/php-api-rest-propel-behavior)
+[![codecov](https://codecov.io/gh/wollanup/php-api-rest-propel-behavior/branch/master/graph/badge.svg)](https://codecov.io/gh/wollanup/php-api-rest-propel-behavior)
+
 
 This Propel behavior adds 3 editable files to your entities :
 
