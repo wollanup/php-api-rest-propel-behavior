@@ -1,0 +1,30 @@
+{
+  "name": "wollanup/php-api-propel-behavior",
+  "license": "MIT",
+  "description": "Propel API Behavior",
+  "type": "propel-behavior",
+  "extra": {
+    "name": "api",
+    "class": "\\Eukles\\Propel\\Generator\\Behavior\\Api\\Api"
+  },
+  "authors": [
+    {
+      "name": "Steve Mareigner",
+      "email": "steve.mareigner@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Eukles\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Eukles\\": "tests/"
+    }
+  },
+  "require": {
+    "propel/propel": "~2.0@dev",
+    "wollanup/php-api-rest-interfaces": "^1.0"
+  }
+}
