@@ -11,6 +11,7 @@ namespace Propel\Generator\Behavior\Api;
 use Eukles\Action\ActionInterface;
 use Eukles\Entity\EntityRequestInterface;
 use Eukles\RouteMap\RouteMapInterface;
+use PHPUnit\Framework\TestCase;
 use Propel\Generator\Util\QuickBuilder;
 use Propel\Runtime\Collection\ObjectCollection;
 
@@ -19,7 +20,7 @@ use Propel\Runtime\Collection\ObjectCollection;
  *
  * @package Propel\Generator\Behavior\Api
  */
-class ApiTest extends \PHPUnit_Framework_TestCase
+class ApiTest extends TestCase
 {
 
     /**
