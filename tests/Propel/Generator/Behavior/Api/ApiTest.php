@@ -67,6 +67,13 @@ class ApiTest extends TestCase
 		</foreign-key>
         <behavior name="api" />
     </table>
+    
+    <table name="api_test_4" namespace="ACME\Prefix">
+        <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
+        <behavior name="api">
+            <parameter name="auto_add_routes_prefix" value="true" />
+        </behavior>
+    </table>
 
 </database>
 EOF;
