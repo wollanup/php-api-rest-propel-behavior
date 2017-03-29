@@ -9,7 +9,6 @@
 namespace Eukles\Propel\Generator\Behavior\Api\Request;
 
 use Propel\Generator\Builder\Om\AbstractOMBuilder;
-use Propel\Generator\Builder\Om\ClassTools;
 use Propel\Generator\Builder\Util\PropelTemplate;
 use Propel\Generator\Model\Table;
 
@@ -25,14 +24,6 @@ class RequestBaseBuilder extends AbstractOMBuilder
     {
         parent::__construct($table);
         $this->setGeneratorConfig($this->getTable()->getGeneratorConfig());
-    }
-
-    /**
-     * @return string
-     */
-    public function getClassFilePath()
-    {
-        return ClassTools::createFilePath($this->getPackagePath() . '/Base', $this->getUnqualifiedClassName());
     }
 
     /**
@@ -59,11 +50,6 @@ class RequestBaseBuilder extends AbstractOMBuilder
     public function renderTemplate($filename, $vars = [], $templateDir = '/templates/')
     {
         $filePath = __DIR__ . '/templates/' . $filename . '.template';
-        if (!file_exists($filePath)) {
-            throw new \InvalidArgumentException(sprintf('Template "%s" not found in "%s" directory',
-                $filename,
-                __DIR__ . '/templates/'));
-        }
         $template = new PropelTemplate();
         $template->setTemplateFile($filePath);
         $vars = array_merge($vars, ['behavior' => $this]);
