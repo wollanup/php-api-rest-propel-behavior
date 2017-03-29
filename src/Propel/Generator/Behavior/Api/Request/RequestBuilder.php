@@ -9,7 +9,6 @@
 namespace Eukles\Propel\Generator\Behavior\Api\Request;
 
 use Propel\Generator\Builder\Om\AbstractOMBuilder;
-use Propel\Generator\Builder\Util\PropelTemplate;
 use Propel\Generator\Model\Table;
 
 class RequestBuilder extends AbstractOMBuilder
@@ -30,10 +29,10 @@ class RequestBuilder extends AbstractOMBuilder
         parent::__construct($table);
         $this->setGeneratorConfig($this->getTable()->getGeneratorConfig());
     }
-    
+
     public function getNamespace()
     {
-        
+    
         return $this->getTable()->getNamespace();
     }
     
@@ -46,21 +45,6 @@ class RequestBuilder extends AbstractOMBuilder
     public function getUnprefixedClassName()
     {
         return $this->getStubObjectBuilder()->getUnprefixedClassName() . 'Request';
-    }
-    
-    public function renderTemplate($filename, $vars = [], $templateDir = '/templates/')
-    {
-        $filePath = __DIR__ . '/templates/' . $filename . '.template';
-        if (!file_exists($filePath)) {
-            throw new \InvalidArgumentException(sprintf('Template "%s" not found in "%s" directory',
-                $filename,
-                __DIR__ . '/templates/'));
-        }
-        $template = new PropelTemplate();
-        $template->setTemplateFile($filePath);
-        $vars = array_merge($vars, ['behavior' => $this]);
-    
-        return $template->render($vars);
     }
     
     /**
@@ -96,7 +80,7 @@ class RequestBuilder extends AbstractOMBuilder
      */
     protected function addClassOpen(&$script)
     {
-        $script .= "use " . ($this->getNamespace() ? "\\" : '') . 'Base\\' . $this->getUnprefixedClassName() . " as " . $this->getUnprefixedClassName() . "Base; 
+        $script .= "use " . ($this->getNamespace() ? ($this->getNamespace() . "\\") : '') . 'Base\\' . $this->getUnprefixedClassName() . " as " . $this->getUnprefixedClassName() . "Base; 
 use " . $this->getTableMapClassName(true) . " as Map;
 
 /**
