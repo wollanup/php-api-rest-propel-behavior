@@ -68,7 +68,14 @@ class ApiTest extends TestCase
         <behavior name="api" />
     </table>
     
-    <table name="api_test_4" namespace="ACME\Prefix">
+    <table name="api_test_4" namespace="Prefix\Package">
+        <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
+        <behavior name="api">
+            <parameter name="auto_add_routes_prefix" value="true" />
+        </behavior>
+    </table>
+    
+    <table name="api_test_5" namespace="Core\Package">
         <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
         <behavior name="api">
             <parameter name="auto_add_routes_prefix" value="true" />
@@ -93,6 +100,15 @@ EOF;
         $this->assertInstanceOf(ActionInterface::class, $r);
     }
 
+    /**
+     *
+     */
+    public function testCorePrefix()
+    {
+        $r = $this->createMock('Core\\Package\\ApiTest5RouteMap');
+        $this->assertInstanceOf(RouteMapInterface::class, $r);
+    }
+    
     /**
      *
      */
@@ -121,6 +137,13 @@ EOF;
         $this->assertTrue(class_exists('\Base\ApiTest3Request'));
         $this->assertTrue(class_exists('ApiTest3Action'));
         $this->assertTrue(class_exists('ApiTest3RouteMap'));
+    }
+    
+    public function testCreatesApi4()
+    {
+        $this->assertTrue(class_exists('Prefix\Package\Base\ApiTest4Request'));
+        $this->assertTrue(class_exists('Prefix\Package\ApiTest4Action'));
+        $this->assertTrue(class_exists('Prefix\Package\ApiTest4RouteMap'));
     }
 
     /**
@@ -159,6 +182,15 @@ EOF;
         # Test with empty relation
         $this->assertTrue(method_exists($test1, 'exportPopulatedRelations'));
         $this->assertTrue(method_exists($test2, 'exportPopulatedRelations'));
+    }
+    
+    /**
+     *
+     */
+    public function testPrefix()
+    {
+        $r = $this->createMock('Prefix\\Package\\ApiTest4RouteMap');
+        $this->assertInstanceOf(RouteMapInterface::class, $r);
     }
 
     /**
