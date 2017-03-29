@@ -1,5 +1,5 @@
 {
-  "name": "wollanup/php-api-propel-behavior",
+  "name": "wollanup/php-api-rest-propel-behavior",
   "license": "MIT",
   "description": "Propel API Behavior",
   "type": "propel-behavior",
