@@ -23,6 +23,7 @@ class Api extends Behavior
     protected $additionalBuilders = [
         'Eukles\\Propel\\Generator\\Behavior\\Api\\Request\\RequestBaseBuilder',
         'Eukles\\Propel\\Generator\\Behavior\\Api\\Request\\RequestBuilder',
+        'Eukles\\Propel\\Generator\\Behavior\\Api\\Action\\ActionBaseBuilder',
         'Eukles\\Propel\\Generator\\Behavior\\Api\\Action\\ActionBuilder',
         'Eukles\\Propel\\Generator\\Behavior\\Api\\RouteMap\\RouteMapBuilder',
     ];
