@@ -109,15 +109,6 @@ use Propel\\Runtime\\Map\\RelationMap;
  */
 abstract class " . $this->getUnprefixedClassName() . " extends EntityRequestAbstract
 {
-
-    /**
-     * @var null|[]
-     */
-    private \$exposedProperties;
-    /**
-     * @var null|[]
-     */
-    private \$exposedRelations;
     
 ";
     }

@@ -11,6 +11,7 @@ namespace Propel\Generator\Behavior\Api;
 use Eukles\Action\ActionAbstract;
 use Eukles\Action\ActionCustom;
 use Eukles\Action\ActionInterface;
+use Eukles\Container\Container;
 use Eukles\Entity\EntityRequestInterface;
 use Eukles\RouteMap\RouteMapInterface;
 use PHPUnit\Framework\TestCase;
@@ -46,6 +47,9 @@ class ApiTest extends TestCase
         }
         if (!class_exists('\Eukles\Action\ActionCustom')) {
             require __DIR__ . '/../../../../util/actionCustom.php';
+        }
+        if (!class_exists('\Eukles\Container\Container')) {
+            require __DIR__ . '/../../../../util/container.php';
         }
 
         if (!class_exists('\ApiTest1')) {
@@ -111,13 +115,31 @@ EOF;
         $r = $this->createMock('\\ApiTest1Action');
         $this->assertInstanceOf(ActionInterface::class, $r);
         $this->assertInstanceOf(ActionAbstract::class, $r);
+        $this->assertInstanceOf('Base\\ApiTest1Action', $r);
     }
     
+    public function testActionCreate()
+    {
+        /** @var ActionInterface $a */
+        $a = \ApiTest1Action::create(new Container());
+        
+        $this->assertInstanceOf(\ApiTest1Action::class, $a);
+    }
+    
+    public function testActionCreateQuery()
+    {
+        /** @var ActionInterface $a */
+        $a     = new \ApiTest1Action(new Container());
+        $query = $a->createQuery();
+        $this->assertInstanceOf(\ApiTest1Query::class, $query);
+    }
+
     public function testActionCustom()
     {
         $r = $this->createMock('\\ApiTest6Action');
         $this->assertInstanceOf(ActionInterface::class, $r);
         $this->assertInstanceOf(ActionCustom::class, $r);
+        $this->assertInstanceOf('Base\\ApiTest6Action', $r);
     }
 
     /**

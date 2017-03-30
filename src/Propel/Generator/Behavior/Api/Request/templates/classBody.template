@@ -1,3 +1,12 @@
+    /**
+     * @var null|[]
+     */
+    private $exposedProperties;
+    /**
+     * @var null|[]
+     */
+    private $exposedRelations;
+
 	/**
 	 * @return string
 	 */
