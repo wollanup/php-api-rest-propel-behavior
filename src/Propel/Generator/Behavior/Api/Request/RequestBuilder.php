@@ -18,6 +18,8 @@ class RequestBuilder extends AbstractOMBuilder
      * @var bool
      */
     public $overwrite = false;
+    protected $mapClassName;
+    protected $parentClassName;
 
     /**
      * RequestBuilder constructor.
@@ -28,14 +30,17 @@ class RequestBuilder extends AbstractOMBuilder
     {
         parent::__construct($table);
         $this->setGeneratorConfig($this->getTable()->getGeneratorConfig());
+    
+        $this->mapClassName    = $this->declareClass($this->getTableMapClassName(true));
+        $this->parentClassName = $this->declareClass(($this->getNamespace() ? ($this->getNamespace() . "\\") : '') . 'Base\\' . $this->getUnprefixedClassName());
     }
 
     public function getNamespace()
     {
-    
+
         return $this->getTable()->getNamespace();
     }
-    
+
     /**
      * Returns the qualified (prefixed) classname that is being built by the current class.
      * This method must be implemented by child classes.
@@ -80,9 +85,7 @@ class RequestBuilder extends AbstractOMBuilder
      */
     protected function addClassOpen(&$script)
     {
-        $script .= "use " . ($this->getNamespace() ? ($this->getNamespace() . "\\") : '') . 'Base\\' . $this->getUnprefixedClassName() . " as " . $this->getUnprefixedClassName() . "Base; 
-use " . $this->getTableMapClassName(true) . " as Map;
-
+        $script .= "
 /**
  * List properties we read from client and those we send back to it.
  *
@@ -91,7 +94,7 @@ use " . $this->getTableMapClassName(true) . " as Map;
  * long as it does not already exist in the output directory.
  *
  */
-class " . $this->getUnprefixedClassName() . " extends " . $this->getUnprefixedClassName() . "Base
+class {$this->getUnprefixedClassName()} extends {$this->parentClassName}
 {
 ";
     }

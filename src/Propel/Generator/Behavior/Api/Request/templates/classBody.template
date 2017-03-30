@@ -17,11 +17,11 @@
 
     /**
      *
-     * @return string|Action
+     * @return string|<?php echo $actionClassName . PHP_EOL ?>
      */
     public function getActionClassName()
     {
-        return Action::class;
+        return <?php echo $actionClassName ?>::class;
     }
 
 	/**
@@ -49,7 +49,7 @@
      */
     public function getTableMap()
     {
-        return Map::getTableMap();
+        return <?php echo $mapClassName ?>::getTableMap();
     }
 
     /**
@@ -95,11 +95,11 @@
 	}
 
 	/**
-	 * @return <?php echo $object ?>Record
+	 * @return <?php echo $entityClassName . PHP_EOL ?>
 	 */
 	public function instantiateActiveRecord()
 	{
-		return new <?php echo $object ?>Record;
+		return new <?php echo $entityClassName ?>;
 	}
 
     /**
@@ -112,7 +112,11 @@
      */
     protected function convertsColNameToPhpName(array $colNames)
     {
-        return array_flip(Map::translateFieldNames(array_flip($colNames), Map::TYPE_COLNAME, Map::TYPE_PHPNAME));
+        return array_flip(<?php echo $mapClassName ?>::translateFieldNames(
+            array_flip($colNames),
+            <?php echo $mapClassName ?>::TYPE_COLNAME,
+            <?php echo $mapClassName ?>::TYPE_PHPNAME)
+        );
     }
 
     /**
@@ -123,7 +127,7 @@
      */
     protected function getAllProperties()
     {
-        return Map::getFieldNames();
+        return <?php echo $mapClassName ?>::getFieldNames();
     }
 
     /**

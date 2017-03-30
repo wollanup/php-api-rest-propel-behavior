@@ -8,15 +8,12 @@
 
 namespace Propel\Generator\Behavior\Api;
 
-use Eukles\Action\ActionAbstract;
-use Eukles\Action\ActionCustom;
-use Eukles\Action\ActionInterface;
-use Eukles\Container\Container;
 use Eukles\Entity\EntityRequestInterface;
 use Eukles\RouteMap\RouteMapInterface;
 use PHPUnit\Framework\TestCase;
 use Propel\Generator\Util\QuickBuilder;
 use Propel\Runtime\Collection\ObjectCollection;
+use Util\SetUp;
 
 /**
  * Class ApiTest
@@ -27,119 +24,16 @@ class ApiTest extends TestCase
 {
 
     /**
-     * @var
+     * @var QuickBuilder
      */
-    protected static $generatedSQL;
+    protected $builder;
 
     /**
      *
      */
     public function setUp()
     {
-        if (!class_exists('\Eukles\RouteMap\RouteMapAbstract')) {
-            require __DIR__ . '/../../../../util/routeMap.php';
-        }
-        if (!class_exists('\Eukles\Entity\EntityRequestAbstract')) {
-            require __DIR__ . '/../../../../util/entityRequest.php';
-        }
-        if (!class_exists('\Eukles\Action\ActionAbstract')) {
-            require __DIR__ . '/../../../../util/action.php';
-        }
-        if (!class_exists('\Eukles\Action\ActionCustom')) {
-            require __DIR__ . '/../../../../util/actionCustom.php';
-        }
-        if (!class_exists('\Eukles\Container\Container')) {
-            require __DIR__ . '/../../../../util/container.php';
-        }
-
-        if (!class_exists('\ApiTest1')) {
-            $schema  = <<<EOF
-<database name="api_behavior_test_0">
-    <table name="api_test_1">
-        <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-        <behavior name="api" />
-    </table>
-    
-    <table name="api_test_2">
-        <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-        <column name="api_test_1_id" required="true" type="INTEGER" />
-        <foreign-key foreignTable="api_test_1">
-			<reference local="api_test_1_id" foreign="id"/>
-		</foreign-key>
-        <behavior name="api" />
-    </table>
-    
-    <table name="api_test_3">
-        <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-        <foreign-key foreignTable="api_test_1">
-			<reference local="id" foreign="id"/>
-		</foreign-key>
-        <behavior name="api" />
-    </table>
-    
-    <table name="api_test_4" namespace="Prefix\Package">
-        <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-        <behavior name="api">
-            <parameter name="auto_add_routes_prefix" value="true" />
-        </behavior>
-    </table>
-    
-    <table name="api_test_5" namespace="Core\Package">
-        <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-        <behavior name="api">
-            <parameter name="auto_add_routes_prefix" value="true" />
-        </behavior>
-    </table>
-    
-    <table name="api_test_6">
-        <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
-        <behavior name="api">
-            <parameter name="action_parent_class" value="\Eukles\Action\ActionCustom" />
-        </behavior>
-    </table>
-
-</database>
-EOF;
-            $builder = new QuickBuilder();
-            $builder->setSchema($schema);
-            self::$generatedSQL = $builder->getSQL();
-            $builder->build();
-        }
-    }
-
-    /**
-     *
-     */
-    public function testAction()
-    {
-        $r = $this->createMock('\\ApiTest1Action');
-        $this->assertInstanceOf(ActionInterface::class, $r);
-        $this->assertInstanceOf(ActionAbstract::class, $r);
-        $this->assertInstanceOf('Base\\ApiTest1Action', $r);
-    }
-    
-    public function testActionCreate()
-    {
-        /** @var ActionInterface $a */
-        $a = \ApiTest1Action::create(new Container());
-        
-        $this->assertInstanceOf(\ApiTest1Action::class, $a);
-    }
-    
-    public function testActionCreateQuery()
-    {
-        /** @var ActionInterface $a */
-        $a     = new \ApiTest1Action(new Container());
-        $query = $a->createQuery();
-        $this->assertInstanceOf(\ApiTest1Query::class, $query);
-    }
-
-    public function testActionCustom()
-    {
-        $r = $this->createMock('\\ApiTest6Action');
-        $this->assertInstanceOf(ActionInterface::class, $r);
-        $this->assertInstanceOf(ActionCustom::class, $r);
-        $this->assertInstanceOf('Base\\ApiTest6Action', $r);
+        $this->builder = SetUp::load('schema-full', true);
     }
 
     /**

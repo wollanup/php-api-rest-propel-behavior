@@ -1,0 +1,11 @@
+<database name="api_behavior_test_0">
+	<table name="api_test_10">
+		<column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER"/>
+		<behavior name="api"/>
+	</table>
+
+	<table name="api_test_11" namespace="Prefix\Package" package="prefix.Package">
+		<column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER"/>
+		<behavior name="api"/>
+	</table>
+</database>

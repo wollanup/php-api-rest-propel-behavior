@@ -20,6 +20,8 @@ class RouteMapBuilder extends AbstractOMBuilder
      */
     public $overwrite = false;
     public $resource;
+    protected $actionClassName;
+    protected $requestClassName;
 
     /**
      * RouteMapBuilder constructor.
@@ -30,6 +32,9 @@ class RouteMapBuilder extends AbstractOMBuilder
     {
         parent::__construct($table);
         $this->setGeneratorConfig($this->getTable()->getGeneratorConfig());
+        $this->declareClass("Eukles\\RouteMap\\RouteMapAbstract");
+        $this->actionClassName  = $this->declareClass($this->getStubObjectBuilder()->getClassName() . "Action");
+        $this->requestClassName = $this->declareClass($this->getStubObjectBuilder()->getClassName() . "Request");
     }
 
     /**
@@ -96,11 +101,8 @@ class RouteMapBuilder extends AbstractOMBuilder
                 $prefix = lcfirst($prefix);
             }
         }
-
-        $script .= "use Eukles\\RouteMap\\RouteMapAbstract;
-use " . $this->getStubObjectBuilder()->getClassName() . "Action as Action;
-use " . $this->getStubObjectBuilder()->getClassName() . "Request as Request;
-        
+    
+        $script .= "        
 /**
  * RouteMap class
  *
@@ -108,14 +110,14 @@ use " . $this->getStubObjectBuilder()->getClassName() . "Request as Request;
 class " . $this->getUnprefixedClassName() . " extends RouteMapAbstract   
 {
     /**
-     * @var string|Action
+     * @var string|{$this->actionClassName}
      */
-    protected \$actionClass = Action::class;
+    protected \$actionClass = {$this->actionClassName}::class;
 
     /**
-     * @var string|Request
+     * @var string|{$this->requestClassName}
      */
-    protected \$requestClass = Request::class;
+    protected \$requestClass = {$this->requestClassName}::class;
     /**
      * @var string
      */

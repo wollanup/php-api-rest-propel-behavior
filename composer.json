@@ -20,7 +20,8 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Eukles\\": "tests/"
+      "Eukles\\": "tests/",
+      "Util\\": "tests/util/"
     }
   },
   "require": {

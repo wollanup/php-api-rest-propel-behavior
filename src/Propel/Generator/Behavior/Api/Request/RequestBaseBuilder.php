@@ -9,11 +9,16 @@
 namespace Eukles\Propel\Generator\Behavior\Api\Request;
 
 use Propel\Generator\Builder\Om\AbstractOMBuilder;
+use Propel\Generator\Builder\Om\ClassTools;
 use Propel\Generator\Builder\Util\PropelTemplate;
 use Propel\Generator\Model\Table;
 
 class RequestBaseBuilder extends AbstractOMBuilder
 {
+    
+    protected $actionClassName;
+    protected $entityClassName;
+    protected $mapClassName;
 
     /**
      * RequestBaseBuilder constructor.
@@ -24,6 +29,20 @@ class RequestBaseBuilder extends AbstractOMBuilder
     {
         parent::__construct($table);
         $this->setGeneratorConfig($this->getTable()->getGeneratorConfig());
+    
+        $this->declareClass('Eukles\\Entity\\EntityRequestAbstract');
+        $this->declareClass('Propel\\Runtime\\Map\\RelationMap');
+        $this->mapClassName    = $this->declareClass($this->getTableMapClassName(true));
+        $this->entityClassName = $this->declareClass($this->getStubObjectBuilder()->getClassName());
+        $this->actionClassName = $this->declareClass($this->getStubObjectBuilder()->getClassName() . "Action");
+    }
+
+    /**
+     * @return string
+     */
+    public function getClassFilePath()
+    {
+        return ClassTools::createFilePath($this->getPackagePath() . '/Base', $this->getUnqualifiedClassName());
     }
 
     /**
@@ -71,7 +90,10 @@ class RequestBaseBuilder extends AbstractOMBuilder
     {
         $script .= $this->renderTemplate('classBody',
             [
-                'object' => $this->getObjectName(),
+                'object'          => $this->getObjectName(),
+                'actionClassName' => $this->actionClassName,
+                'mapClassName'    => $this->mapClassName,
+                'entityClassName' => $this->entityClassName,
             ]);
     }
 
@@ -86,7 +108,7 @@ class RequestBaseBuilder extends AbstractOMBuilder
         $script .= "
 }";
     }
-
+    
     /**
      * Opens class.
      *
@@ -95,13 +117,6 @@ class RequestBaseBuilder extends AbstractOMBuilder
     protected function addClassOpen(&$script)
     {
         $script .= "
-use Eukles\\Entity\\EntityRequestAbstract;
-use " . $this->getStubObjectBuilder()->getClassName() . " as " . $this->getStubObjectBuilder()->getObjectName() . "Record;
-use " . $this->getStubObjectBuilder()->getClassName() . "Action as Action;
-use " . $this->getTableMapClassName(true) . " as Map;
-use Propel\\Runtime\\Map\\RelationMap;
-
-
 /**
  * List properties we read from client and those we send back to it.
  *
