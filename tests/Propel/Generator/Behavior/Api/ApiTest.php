@@ -111,13 +111,15 @@ EOF;
         $r = $this->createMock('\\ApiTest1Action');
         $this->assertInstanceOf(ActionInterface::class, $r);
         $this->assertInstanceOf(ActionAbstract::class, $r);
+        $this->assertInstanceOf('Base\\ApiTest1Action', $r);
     }
-    
+
     public function testActionCustom()
     {
         $r = $this->createMock('\\ApiTest6Action');
         $this->assertInstanceOf(ActionInterface::class, $r);
         $this->assertInstanceOf(ActionCustom::class, $r);
+        $this->assertInstanceOf('Base\\ApiTest6Action', $r);
     }
 
     /**

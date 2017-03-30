@@ -14,12 +14,12 @@ use Propel\Generator\Model\Table;
 
 class ActionBaseBuilder extends AbstractOMBuilder
 {
-    
+
     /**
      * @var bool
      */
     public $overwrite = true;
-    
+
     /**
      * ActionBuilder constructor.
      *
@@ -30,14 +30,14 @@ class ActionBaseBuilder extends AbstractOMBuilder
         parent::__construct($table);
         $this->setGeneratorConfig($this->getTable()->getGeneratorConfig());
     }
-    
+
     public function getNamespace()
     {
         $ns = $this->getTable()->getNamespace();
-        
+
         return $ns . ($ns ? '\\' : '') . 'Base';
     }
-    
+
     /**
      * Returns the qualified (prefixed) class name that is being built by the current class.
      * This method must be implemented by child classes.
@@ -62,16 +62,16 @@ class ActionBaseBuilder extends AbstractOMBuilder
     protected function addClassBody(&$script)
     {
         $queryClass = $this->getStubObjectBuilder()->getObjectClassName() . "Query";
-        
+        $className  = $this->getUnprefixedClassName();
         $script .= "
     /**
      * @param ContainerInterface \$c
      *
-     * @return static
+     * @return {$className}
      */
     public static function create(ContainerInterface \$c)
     {
-        return new static(\$c);
+        return new {$className}(\$c);
     }
 
     /**
@@ -98,7 +98,7 @@ class ActionBaseBuilder extends AbstractOMBuilder
      */
     protected function addClassClose(&$script)
     {
-        
+    
         $script .= "
 }";
     }
@@ -112,17 +112,15 @@ class ActionBaseBuilder extends AbstractOMBuilder
     {
         $actionParentClass = $this->getParameterFromApiBehavior(Api::PARAM_ACTION_PARENT_CLASS);
         $shortParent       = substr(strrchr($actionParentClass, '\\'), 1);
-        
+    
         $script .= "use " . $actionParentClass . ";
 use Eukles\\Service\\QueryModifier\\QueryModifierInterface;
 use Psr\\Container\\ContainerInterface;
         
 /**
- * Action class
+ * Action class.
  *
- * You should add additional methods to this class to meet the
- * application requirements. This class will only be generated as
- * long as it does not already exist in the output directory.
+ * This base class should not be modified as it's overwritten at build time.
  */
 abstract class {$this->getUnprefixedClassName()} extends {$shortParent}   
 {
