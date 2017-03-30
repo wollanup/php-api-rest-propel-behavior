@@ -8,6 +8,8 @@
 
 namespace Propel\Generator\Behavior\Api;
 
+use Eukles\Action\ActionAbstract;
+use Eukles\Action\ActionCustom;
 use Eukles\Action\ActionInterface;
 use Eukles\Entity\EntityRequestInterface;
 use Eukles\RouteMap\RouteMapInterface;
@@ -41,6 +43,9 @@ class ApiTest extends TestCase
         }
         if (!class_exists('\Eukles\Action\ActionAbstract')) {
             require __DIR__ . '/../../../../util/action.php';
+        }
+        if (!class_exists('\Eukles\Action\ActionCustom')) {
+            require __DIR__ . '/../../../../util/actionCustom.php';
         }
 
         if (!class_exists('\ApiTest1')) {
@@ -81,6 +86,13 @@ class ApiTest extends TestCase
             <parameter name="auto_add_routes_prefix" value="true" />
         </behavior>
     </table>
+    
+    <table name="api_test_6">
+        <column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER" />
+        <behavior name="api">
+            <parameter name="action_parent_class" value="\Eukles\Action\ActionCustom" />
+        </behavior>
+    </table>
 
 </database>
 EOF;
@@ -94,10 +106,18 @@ EOF;
     /**
      *
      */
-    public function testActionInterface()
+    public function testAction()
     {
         $r = $this->createMock('\\ApiTest1Action');
         $this->assertInstanceOf(ActionInterface::class, $r);
+        $this->assertInstanceOf(ActionAbstract::class, $r);
+    }
+    
+    public function testActionCustom()
+    {
+        $r = $this->createMock('\\ApiTest6Action');
+        $this->assertInstanceOf(ActionInterface::class, $r);
+        $this->assertInstanceOf(ActionCustom::class, $r);
     }
 
     /**
