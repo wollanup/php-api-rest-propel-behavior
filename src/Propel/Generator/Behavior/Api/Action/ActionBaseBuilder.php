@@ -19,6 +19,10 @@ class ActionBaseBuilder extends AbstractOMBuilder
      * @var bool
      */
     public $overwrite = true;
+    protected $shortActionName;
+    protected $shortChildName;
+    protected $shortParentName;
+    protected $shortQueryName;
 
     /**
      * ActionBuilder constructor.
@@ -29,6 +33,18 @@ class ActionBaseBuilder extends AbstractOMBuilder
     {
         parent::__construct($table);
         $this->setGeneratorConfig($this->getTable()->getGeneratorConfig());
+    
+        $this->declareClass("Psr\\Container\\ContainerInterface");
+        $this->declareClass("Eukles\\Service\\QueryModifier\\QueryModifierInterface");
+        $this->shortParentName = $this->declareClass($this->getParameterFromApiBehavior(Api::PARAM_ACTION_PARENT_CLASS));
+        $shortName             = $this->getTable()->getPhpName();
+        $ns                    = $this->getTable()->getNamespace();
+        if ($ns) {
+            $ns .= "\\";
+        }
+        $this->shortActionName = $this->declareClass("{$ns}{$shortName}Action");
+        $this->shortQueryName  = $this->declareClass("{$ns}{$shortName}Query");
+
     }
 
     public function getNamespace()
@@ -48,7 +64,7 @@ class ActionBaseBuilder extends AbstractOMBuilder
     {
         return $this->getStubObjectBuilder()->getUnprefixedClassName() . 'Action';
     }
-    
+
     /**
      * This method adds the contents of the generated class to the script.
      *
@@ -61,36 +77,34 @@ class ActionBaseBuilder extends AbstractOMBuilder
      */
     protected function addClassBody(&$script)
     {
-        $queryClass = $this->getStubObjectBuilder()->getObjectClassName() . "Query";
-        $className  = $this->getUnprefixedClassName();
         $script .= "
     /**
      * @param ContainerInterface \$c
      *
-     * @return {$className}
+     * @return {$this->shortActionName}
      */
     public static function create(ContainerInterface \$c)
     {
-        return new {$className}(\$c);
+        return new {$this->shortActionName}(\$c);
     }
 
     /**
      * Returns a new Query object.
      * @param QueryModifierInterface \$qm Optional modifier to build the query with
      *
-     * @return {$queryClass} Query object
+     * @return {$this->shortQueryName} Query object
      */
     public function createQuery(QueryModifierInterface \$qm = null)
 	{
         if(\$qm){
-			return \$qm->apply({$queryClass}::create());
+			return \$qm->apply({$this->shortQueryName}::create());
 		}
 	
-		return {$queryClass}::create();
+		return {$this->shortQueryName}::create();
 	}        
 ";
     }
-    
+
     /**
      * Closes class.
      *
@@ -110,19 +124,14 @@ class ActionBaseBuilder extends AbstractOMBuilder
      */
     protected function addClassOpen(&$script)
     {
-        $actionParentClass = $this->getParameterFromApiBehavior(Api::PARAM_ACTION_PARENT_CLASS);
-        $shortParent       = substr(strrchr($actionParentClass, '\\'), 1);
     
-        $script .= "use " . $actionParentClass . ";
-use Eukles\\Service\\QueryModifier\\QueryModifierInterface;
-use Psr\\Container\\ContainerInterface;
-        
+        $script .= "
 /**
  * Action class.
  *
  * This base class should not be modified as it's overwritten at build time.
  */
-abstract class {$this->getUnprefixedClassName()} extends {$shortParent}   
+abstract class {$this->getUnprefixedClassName()} extends {$this->shortParentName}   
 {
 ";
     }
