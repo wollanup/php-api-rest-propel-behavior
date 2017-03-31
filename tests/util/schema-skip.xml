@@ -1,0 +1,17 @@
+<database name="api_behavior_test_0">
+	<behavior name="api">
+		<parameter name="action_class" value="\Eukles\Action\ActionMock"/>
+		<parameter name="entity_request_class" value="\Eukles\Entity\EntityRequestMock"/>
+		<parameter name="route_map_class" value="\Eukles\RouteMap\RouteMapMock"/>
+	</behavior>
+	<table name="api_test_20">
+		<column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER"/>
+	</table>
+
+	<table name="api_test_21">
+		<column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER"/>
+		<behavior name="api">
+			<parameter name="skip_classes" value="true"/>
+		</behavior>
+	</table>
+</database>
