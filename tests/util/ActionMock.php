@@ -1,13 +1,13 @@
 <?php
 namespace Eukles\Action {
-
+    
     use Eukles\Service\QueryModifier\QueryModifierInterface;
     use Propel\Runtime\ActiveQuery\ModelCriteria;
     use Psr\Container\ContainerInterface;
     use Psr\Http\Message\ResponseInterface;
     use Psr\Http\Message\ServerRequestInterface;
-
-    class ActionAbstract implements ActionInterface
+    
+    class ActionMock implements ActionInterface
     {
 
         /**

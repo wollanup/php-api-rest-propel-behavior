@@ -8,21 +8,23 @@
 
 namespace Util;
 
+use Propel\Generator\Util\QuickBuilder;
+
 class SetUp
 {
-    
+
     /**
-     * @var Builder[]
+     * @var QuickBuilder[]
      */
     static $builder = [];
     static $classesBuilt = [];
-    
+
     /**
      * @param      $xml
      *
      * @param bool $buildClasses
      *
-     * @return Builder
+     * @return QuickBuilder
      */
     public static function load($xml, $buildClasses = false)
     {
@@ -30,16 +32,15 @@ class SetUp
     
         if (!$initDone) {
             $initDone = true;
-            require __DIR__ . '/routeMap.php';
-            require __DIR__ . '/entityRequest.php';
-            require __DIR__ . '/action.php';
-            require __DIR__ . '/actionCustom.php';
-            require __DIR__ . '/container.php';
+            require __DIR__ . '/RouteMapMock.php';
+            require __DIR__ . '/EntityRequestMock.php';
+            require __DIR__ . '/ActionMock.php';
+            require __DIR__ . '/ContainerMock.php';
         }
     
         if (!isset(self::$builder[$xml])) {
             $schema              = file_get_contents(__DIR__ . '/' . $xml . '.xml');
-            self::$builder[$xml] = new Builder();
+            self::$builder[$xml] = new QuickBuilder();
             self::$builder[$xml]->setSchema($schema);
         }
         if ($buildClasses && empty(self::$classesBuilt[$xml])) {

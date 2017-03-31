@@ -22,6 +22,7 @@ class RouteMapBuilder extends AbstractOMBuilder
     public $resource;
     protected $actionClassName;
     protected $requestClassName;
+    protected $shortParentName;
 
     /**
      * RouteMapBuilder constructor.
@@ -32,7 +33,7 @@ class RouteMapBuilder extends AbstractOMBuilder
     {
         parent::__construct($table);
         $this->setGeneratorConfig($this->getTable()->getGeneratorConfig());
-        $this->declareClass("Eukles\\RouteMap\\RouteMapAbstract");
+        $this->shortParentName  = $this->declareClass($this->getParameterFromApiBehavior(Api::PARAM_route_map_class));    
         $this->actionClassName  = $this->declareClass($this->getStubObjectBuilder()->getClassName() . "Action");
         $this->requestClassName = $this->declareClass($this->getStubObjectBuilder()->getClassName() . "Request");
     }
@@ -107,7 +108,7 @@ class RouteMapBuilder extends AbstractOMBuilder
  * RouteMap class
  *
  */
-class " . $this->getUnprefixedClassName() . " extends RouteMapAbstract   
+class " . $this->getUnprefixedClassName() . " extends {$this->shortParentName}   
 {
     /**
      * @var string|{$this->actionClassName}

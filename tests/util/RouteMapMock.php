@@ -1,10 +1,10 @@
 <?php
 namespace Eukles\RouteMap {
-
+    
     use Eukles\Service\Router\RouterInterface;
     use Psr\Container\ContainerInterface;
-
-    class RouteMapAbstract implements RouteMapInterface
+    
+    class RouteMapMock implements RouteMapInterface
     {
 
         protected $container;

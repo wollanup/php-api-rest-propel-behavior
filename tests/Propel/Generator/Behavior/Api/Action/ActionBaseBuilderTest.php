@@ -48,7 +48,7 @@ class ActionBaseBuilderTest extends TestCase
         $expect            = [
             'Psr\\Container'                 => ['ContainerInterface' => 'ContainerInterface',],
             'Eukles\\Service\\QueryModifier' => ['QueryModifierInterface' => 'QueryModifierInterface',],
-            'Eukles\\Action'                 => ['ActionAbstract' => 'ActionAbstract',],
+            'Eukles\\Action'                 => ['ActionMock' => 'ActionMock',],
             ''                               => [
                 'ApiTest10Action' => 'ChildApiTest10Action',
                 'ApiTest10Query'  => 'ChildApiTest10Query',
@@ -61,7 +61,7 @@ class ActionBaseBuilderTest extends TestCase
         $expect            = [
             'Psr\\Container'                 => ['ContainerInterface' => 'ContainerInterface',],
             'Eukles\\Service\\QueryModifier' => ['QueryModifierInterface' => 'QueryModifierInterface',],
-            'Eukles\\Action'                 => ['ActionAbstract' => 'ActionAbstract',],
+            'Eukles\\Action'                 => ['ActionMock' => 'ActionMock',],
             'Prefix\\Package'                => [
                 'ApiTest11Action' => 'ChildApiTest11Action',
                 'ApiTest11Query'  => 'ChildApiTest11Query',
