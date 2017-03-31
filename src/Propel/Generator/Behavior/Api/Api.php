@@ -14,11 +14,12 @@ use Propel\Generator\Model\Table;
 
 class Api extends Behavior
 {
-    
+
     const PARAM_action_class = 'action_class';
     const PARAM_entity_request_class = 'entity_request_class';
     const PARAM_route_map_class = 'route_map_class';
     const PARAM_ROUTES_PREFIX = 'auto_add_routes_prefix';
+    const PARAM_SKIP_CLASSES = 'skip_classes';
     /**
      * @var array
      */
@@ -34,15 +35,21 @@ class Api extends Behavior
      */
     protected $parameters = [
         self::PARAM_action_class         => 'Eukles\\Action\\ActionAbstract',
-        self::PARAM_entity_request_class => 'Eukles\\Entity\\EntityRequestMock',
-        self::PARAM_route_map_class      => 'Eukles\\RouteMap\\RouteMapMock',
+        self::PARAM_entity_request_class => 'Eukles\\Entity\\EntityRequestAbstract',
+        self::PARAM_route_map_class      => 'Eukles\\RouteMap\\RouteMapAbstract',
         self::PARAM_ROUTES_PREFIX        => '',
+        self::PARAM_SKIP_CLASSES         => false,
     ];
     /**
      * @var ObjectBuilder
      */
     private $builder;
     
+    public function hasAdditionalBuilders()
+    {
+        return $this->getParameter(self::PARAM_SKIP_CLASSES) !== "true";
+    }
+
     /**
      * @param ObjectBuilder $builder
      *
