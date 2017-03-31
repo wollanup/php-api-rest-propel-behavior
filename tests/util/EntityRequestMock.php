@@ -7,7 +7,7 @@ namespace Eukles\Entity {
     use Propel\Runtime\Map\TableMap;
     use Psr\Container\ContainerInterface;
     
-    class EntityRequestAbstract implements EntityRequestInterface
+    class EntityRequestMock implements EntityRequestInterface
     {
         
         /**

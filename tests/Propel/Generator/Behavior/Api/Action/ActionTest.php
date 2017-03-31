@@ -8,27 +8,28 @@
 
 namespace Propel\Generator\Behavior\Api\Action;
 
-use Eukles\Action\ActionAbstract;
-use Eukles\Action\ActionCustom;
+use Eukles\Action\ActionCustomMock;
 use Eukles\Action\ActionInterface;
-use Eukles\Container\Container;
+use Eukles\Action\ActionMock;
+use Eukles\Action\ActionMockMock;
+use Eukles\Container\ContainerMock;
 use PHPUnit\Framework\TestCase;
 use Propel\Generator\Util\QuickBuilder;
 use Util\SetUp;
 
 class ActionTest extends TestCase
 {
-    
+
     /**
      * @var QuickBuilder
      */
     protected $builder;
-    
+
     public function setUp()
     {
         $this->builder = SetUp::load('schema-full', true);
     }
-    
+
     /**
      *
      */
@@ -36,31 +37,23 @@ class ActionTest extends TestCase
     {
         $r = $this->createMock('\\ApiTest1Action');
         $this->assertInstanceOf(ActionInterface::class, $r);
-        $this->assertInstanceOf(ActionAbstract::class, $r);
+        $this->assertInstanceOf(ActionMock::class, $r);
         $this->assertInstanceOf('Base\\ApiTest1Action', $r);
     }
     
     public function testActionCreate()
     {
         /** @var ActionInterface $a */
-        $a = \ApiTest1Action::create(new Container());
-        
+        $a = \ApiTest1Action::create(new ContainerMock());
+
         $this->assertInstanceOf(\ApiTest1Action::class, $a);
     }
     
     public function testActionCreateQuery()
     {
         /** @var ActionInterface $a */
-        $a     = new \ApiTest1Action(new Container());
+        $a     = new \ApiTest1Action(new ContainerMock());
         $query = $a->createQuery();
         $this->assertInstanceOf(\ApiTest1Query::class, $query);
-    }
-    
-    public function testActionCustom()
-    {
-        $r = $this->createMock('\\ApiTest6Action');
-        $this->assertInstanceOf(ActionInterface::class, $r);
-        $this->assertInstanceOf(ActionCustom::class, $r);
-        $this->assertInstanceOf('Base\\ApiTest6Action', $r);
     }
 }

@@ -3,7 +3,7 @@ namespace Eukles\Container {
     
     use Psr\Container\ContainerInterface;
     
-    class Container implements ContainerInterface
+    class ContainerMock implements ContainerInterface
     {
         
         /**

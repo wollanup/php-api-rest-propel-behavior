@@ -37,7 +37,7 @@ class ActionBaseBuilder extends AbstractOMBuilder
 
         $this->declareClass("Psr\\Container\\ContainerInterface");
         $this->declareClass("Eukles\\Service\\QueryModifier\\QueryModifierInterface");
-        $this->shortParentName = $this->declareClass($this->getParameterFromApiBehavior(Api::PARAM_ACTION_PARENT_CLASS));
+        $this->shortParentName = $this->declareClass($this->getParameterFromApiBehavior(Api::PARAM_action_class));
         $shortName             = $this->getTable()->getPhpName();
         $ns                    = $this->getTable()->getNamespace();
         if ($ns) {
@@ -145,6 +145,11 @@ abstract class {$this->getUnprefixedClassName()} extends {$this->shortParentName
 ";
     }
     
+    /**
+     * @param $parameter
+     *
+     * @return string
+     */
     private function getParameterFromApiBehavior($parameter)
     {
         return $this->getTable()->getBehavior('api')->getParameter($parameter);

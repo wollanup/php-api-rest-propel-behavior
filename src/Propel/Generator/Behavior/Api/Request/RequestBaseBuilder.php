@@ -8,6 +8,7 @@
 
 namespace Eukles\Propel\Generator\Behavior\Api\Request;
 
+use Eukles\Propel\Generator\Behavior\Api\Api;
 use Propel\Generator\Builder\Om\AbstractOMBuilder;
 use Propel\Generator\Builder\Om\ClassTools;
 use Propel\Generator\Builder\Util\PropelTemplate;
@@ -15,10 +16,12 @@ use Propel\Generator\Model\Table;
 
 class RequestBaseBuilder extends AbstractOMBuilder
 {
-    
+
     protected $actionClassName;
     protected $entityClassName;
     protected $mapClassName;
+    protected $shortParentName;
+
 
     /**
      * RequestBaseBuilder constructor.
@@ -29,9 +32,9 @@ class RequestBaseBuilder extends AbstractOMBuilder
     {
         parent::__construct($table);
         $this->setGeneratorConfig($this->getTable()->getGeneratorConfig());
-    
-        $this->declareClass('Eukles\\Entity\\EntityRequestAbstract');
+
         $this->declareClass('Propel\\Runtime\\Map\\RelationMap');
+        $this->shortParentName = $this->declareClass($this->getParameterFromApiBehavior(Api::PARAM_entity_request_class));
         $this->mapClassName    = $this->declareClass($this->getTableMapClassName(true));
         $this->entityClassName = $this->declareClass($this->getStubObjectBuilder()->getClassName());
         $this->actionClassName = $this->declareClass($this->getStubObjectBuilder()->getClassName() . "Action");
@@ -122,9 +125,20 @@ class RequestBaseBuilder extends AbstractOMBuilder
  *
  * This base class should not be modified as it's overwritten at build time.
  */
-abstract class " . $this->getUnprefixedClassName() . " extends EntityRequestAbstract
+abstract class " . $this->getUnprefixedClassName() . " extends {$this->shortParentName}
 {
     
 ";
     }
+    
+    /**
+     * @param $parameter
+     *
+     * @return string
+     */
+    private function getParameterFromApiBehavior($parameter)
+    {
+        return $this->getTable()->getBehavior('api')->getParameter($parameter);
+    }
+
 }

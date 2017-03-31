@@ -1,7 +1,12 @@
 <database name="api_behavior_test_0">
 	<table name="api_test_1">
 		<column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER"/>
-		<behavior name="api"/>
+		<behavior name="api">
+			<parameter name="action_class" value="\Eukles\Action\ActionMock"/>
+			<parameter name="entity_request_class" value="\Eukles\Entity\EntityRequestMock"/>
+			<parameter name="route_map_class" value="\Eukles\RouteMap\RouteMapMock"/>
+			<parameter name="route_map_class" value="\Eukles\RouteMap\RouteMapMock"/>
+		</behavior>
 	</table>
 
 	<table name="api_test_2">
@@ -10,7 +15,11 @@
 		<foreign-key foreignTable="api_test_1">
 			<reference local="api_test_1_id" foreign="id"/>
 		</foreign-key>
-		<behavior name="api"/>
+		<behavior name="api">
+			<parameter name="action_class" value="\Eukles\Action\ActionMock"/>
+			<parameter name="entity_request_class" value="\Eukles\Entity\EntityRequestMock"/>
+			<parameter name="route_map_class" value="\Eukles\RouteMap\RouteMapMock"/>
+		</behavior>
 	</table>
 
 	<table name="api_test_3">
@@ -18,13 +27,20 @@
 		<foreign-key foreignTable="api_test_1">
 			<reference local="id" foreign="id"/>
 		</foreign-key>
-		<behavior name="api"/>
+		<behavior name="api">
+			<parameter name="action_class" value="\Eukles\Action\ActionMock"/>
+			<parameter name="entity_request_class" value="\Eukles\Entity\EntityRequestMock"/>
+			<parameter name="route_map_class" value="\Eukles\RouteMap\RouteMapMock"/>
+		</behavior>
 	</table>
 
 	<table name="api_test_4" namespace="Prefix\Package">
 		<column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER"/>
 		<behavior name="api">
 			<parameter name="auto_add_routes_prefix" value="true"/>
+			<parameter name="action_class" value="\Eukles\Action\ActionMock"/>
+			<parameter name="entity_request_class" value="\Eukles\Entity\EntityRequestMock"/>
+			<parameter name="route_map_class" value="\Eukles\RouteMap\RouteMapMock"/>
 		</behavior>
 	</table>
 
@@ -32,19 +48,28 @@
 		<column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER"/>
 		<behavior name="api">
 			<parameter name="auto_add_routes_prefix" value="true"/>
+			<parameter name="action_class" value="\Eukles\Action\ActionMock"/>
+			<parameter name="entity_request_class" value="\Eukles\Entity\EntityRequestMock"/>
+			<parameter name="route_map_class" value="\Eukles\RouteMap\RouteMapMock"/>
 		</behavior>
 	</table>
 
 	<table name="api_test_6">
 		<column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER"/>
 		<behavior name="api">
-			<parameter name="action_parent_class" value="\Eukles\Action\ActionCustom"/>
+			<parameter name="action_class" value="\Eukles\Action\ActionMock"/>
+			<parameter name="entity_request_class" value="\Eukles\Entity\EntityRequestMock"/>
+			<parameter name="route_map_class" value="\Eukles\RouteMap\RouteMapMock"/>
 		</behavior>
 	</table>
 
 	<table name="api_test_7" namespace="Prefix\Package" package="prefix.Package">
 		<column name="id" required="true" primaryKey="true" autoIncrement="true" type="INTEGER"/>
-		<behavior name="api"/>
+		<behavior name="api">
+			<parameter name="action_class" value="\Eukles\Action\ActionMock"/>
+			<parameter name="entity_request_class" value="\Eukles\Entity\EntityRequestMock"/>
+			<parameter name="route_map_class" value="\Eukles\RouteMap\RouteMapMock"/>
+		</behavior>
 	</table>
 
 </database>

@@ -48,7 +48,7 @@ class RouteMapBuilderTest extends TestCase
         $table           = $this->builder->getDatabase()->getTable("api_test_10");
         $routeMapBuilder = new RouteMapBuilder($table);
         $expect          = [
-            'Eukles\\RouteMap' => ['RouteMapAbstract' => 'RouteMapAbstract',],
+            'Eukles\\RouteMap' => ['RouteMapMock' => 'RouteMapMock',],
             ''                 => [
                 'ApiTest10Action'  => 'ApiTest10Action',
                 'ApiTest10Request' => 'ApiTest10Request',
@@ -59,7 +59,7 @@ class RouteMapBuilderTest extends TestCase
         $table           = $this->builder->getDatabase()->getTable("api_test_11");
         $routeMapBuilder = new RouteMapBuilder($table);
         $expect          = [
-            'Eukles\\RouteMap' => ['RouteMapAbstract' => 'RouteMapAbstract',],
+            'Eukles\\RouteMap' => ['RouteMapMock' => 'RouteMapMock',],
             'Prefix\\Package'  => [
                 'ApiTest11Action'  => 'ApiTest11Action',
                 'ApiTest11Request' => 'ApiTest11Request',

@@ -14,8 +14,10 @@ use Propel\Generator\Model\Table;
 
 class Api extends Behavior
 {
-
-    const PARAM_ACTION_PARENT_CLASS = 'action_parent_class';
+    
+    const PARAM_action_class = 'action_class';
+    const PARAM_entity_request_class = 'entity_request_class';
+    const PARAM_route_map_class = 'route_map_class';
     const PARAM_ROUTES_PREFIX = 'auto_add_routes_prefix';
     /**
      * @var array
@@ -31,8 +33,10 @@ class Api extends Behavior
      * @var array Parameters
      */
     protected $parameters = [
-        self::PARAM_ACTION_PARENT_CLASS => 'Eukles\\Action\\ActionAbstract',
-        self::PARAM_ROUTES_PREFIX       => '',
+        self::PARAM_action_class         => 'Eukles\\Action\\ActionAbstract',
+        self::PARAM_entity_request_class => 'Eukles\\Entity\\EntityRequestMock',
+        self::PARAM_route_map_class      => 'Eukles\\RouteMap\\RouteMapMock',
+        self::PARAM_ROUTES_PREFIX        => '',
     ];
     /**
      * @var ObjectBuilder

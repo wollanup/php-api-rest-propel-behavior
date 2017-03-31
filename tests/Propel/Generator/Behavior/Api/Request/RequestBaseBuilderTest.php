@@ -46,7 +46,7 @@ class RequestBaseBuilderTest extends TestCase
         $table              = $this->builder->getDatabase()->getTable("api_test_10");
         $requestBaseBuilder = new RequestBaseBuilder($table);
         $expect             = [
-            'Eukles\\Entity'       => ['EntityRequestAbstract' => 'EntityRequestAbstract',],
+            'Eukles\\Entity'       => ['EntityRequestMock' => 'EntityRequestMock',],
             'Propel\\Runtime\\Map' => ['RelationMap' => 'RelationMap',],
             'Map'                  => ['ApiTest10TableMap' => 'ApiTest10TableMap',],
             ''                     => [
@@ -59,7 +59,7 @@ class RequestBaseBuilderTest extends TestCase
         $table              = $this->builder->getDatabase()->getTable("api_test_11");
         $requestBaseBuilder = new RequestBaseBuilder($table);
         $expect             = [
-            'Eukles\\Entity'       => ['EntityRequestAbstract' => 'EntityRequestAbstract',],
+            'Eukles\\Entity'       => ['EntityRequestMock' => 'EntityRequestMock',],
             'Propel\\Runtime\\Map' => ['RelationMap' => 'RelationMap',],
             'Prefix\\Package\\Map' => ['ApiTest11TableMap' => 'ApiTest11TableMap',],
             'Prefix\\Package'      => [
