@@ -18,7 +18,11 @@ class ActionBuilder extends AbstractOMBuilder
      * @var bool
      */
     public $overwrite = false;
-
+    /**
+     * @var string
+     */
+    protected $shortParentName;
+    
     /**
      * ActionBuilder constructor.
      *
@@ -28,6 +32,10 @@ class ActionBuilder extends AbstractOMBuilder
     {
         parent::__construct($table);
         $this->setGeneratorConfig($this->getTable()->getGeneratorConfig());
+    
+        $this->declareClass("Psr\\Container\\ContainerInterface");
+        $this->declareClass("Eukles\\Service\\QueryModifier\\QueryModifierInterface");
+        $this->shortParentName = $this->declareClass(($this->getNamespace() ? ($this->getNamespace() . "\\") : '') . 'Base\\' . $this->getUnprefixedClassName());
     }
 
     /**
@@ -66,7 +74,7 @@ class ActionBuilder extends AbstractOMBuilder
         $script .= "
 }";
     }
-    
+
     /**
      * Opens class.
      *
@@ -74,10 +82,7 @@ class ActionBuilder extends AbstractOMBuilder
      */
     protected function addClassOpen(&$script)
     {
-        $script .= "use " . ($this->getNamespace() ? ($this->getNamespace() . "\\") : '') . 'Base\\' . $this->getUnprefixedClassName() . " as " . $this->getUnprefixedClassName() . "Base;
-use Eukles\\Service\\QueryModifier\\QueryModifierInterface;
-use Psr\\Container\\ContainerInterface;
-        
+        $script .= "        
 /**
  * Action class
  *
@@ -85,7 +90,7 @@ use Psr\\Container\\ContainerInterface;
  * application requirements. This class will only be generated as
  * long as it does not already exist in the output directory.
  */
-class {$this->getUnprefixedClassName()} extends  " . $this->getUnprefixedClassName() . "Base
+class {$this->getUnprefixedClassName()} extends  " . $this->shortParentName . "
 {
 
 ";

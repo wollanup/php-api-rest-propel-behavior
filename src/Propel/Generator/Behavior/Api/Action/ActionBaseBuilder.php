@@ -10,6 +10,7 @@ namespace Eukles\Propel\Generator\Behavior\Api\Action;
 
 use Eukles\Propel\Generator\Behavior\Api\Api;
 use Propel\Generator\Builder\Om\AbstractOMBuilder;
+use Propel\Generator\Builder\Om\ClassTools;
 use Propel\Generator\Model\Table;
 
 class ActionBaseBuilder extends AbstractOMBuilder
@@ -33,7 +34,7 @@ class ActionBaseBuilder extends AbstractOMBuilder
     {
         parent::__construct($table);
         $this->setGeneratorConfig($this->getTable()->getGeneratorConfig());
-    
+
         $this->declareClass("Psr\\Container\\ContainerInterface");
         $this->declareClass("Eukles\\Service\\QueryModifier\\QueryModifierInterface");
         $this->shortParentName = $this->declareClass($this->getParameterFromApiBehavior(Api::PARAM_ACTION_PARENT_CLASS));
@@ -45,6 +46,14 @@ class ActionBaseBuilder extends AbstractOMBuilder
         $this->shortActionName = $this->declareClass("{$ns}{$shortName}Action");
         $this->shortQueryName  = $this->declareClass("{$ns}{$shortName}Query");
 
+    }
+    
+    /**
+     * @return string
+     */
+    public function getClassFilePath()
+    {
+        return ClassTools::createFilePath($this->getPackagePath() . '/Base', $this->getUnqualifiedClassName());
     }
 
     public function getNamespace()
