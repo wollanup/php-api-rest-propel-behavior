@@ -4,6 +4,5 @@ build/coverage/
 build/logs/
 build/phpdox/
 composer.lock
-build/composer.phar
 .idea
-
+composer.phar
