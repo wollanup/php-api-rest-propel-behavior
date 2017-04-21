@@ -2,10 +2,10 @@
 namespace Eukles\Entity {
     
     use Eukles\Action\ActionInterface;
+    use Eukles\Container\ContainerInterface;
     use Propel\Runtime\ActiveQuery\ModelCriteria;
     use Propel\Runtime\ActiveRecord\ActiveRecordInterface;
     use Propel\Runtime\Map\TableMap;
-    use Psr\Container\ContainerInterface;
     
     class EntityRequestMock implements EntityRequestInterface
     {
