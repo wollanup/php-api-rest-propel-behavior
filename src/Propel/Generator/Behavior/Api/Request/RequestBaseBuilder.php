@@ -94,6 +94,7 @@ class RequestBaseBuilder extends AbstractOMBuilder
         $script .= $this->renderTemplate('classBody',
             [
                 'object'          => $this->getObjectName(),
+                'objectPlural'    => $this->getPluralizer()->getPluralForm(lcfirst($this->getObjectName())),
                 'actionClassName' => $this->actionClassName,
                 'mapClassName'    => $this->mapClassName,
                 'entityClassName' => $this->entityClassName,
@@ -127,7 +128,7 @@ class RequestBaseBuilder extends AbstractOMBuilder
  */
 abstract class " . $this->getUnprefixedClassName() . " extends {$this->shortParentName}
 {
-    
+
 ";
     }
     

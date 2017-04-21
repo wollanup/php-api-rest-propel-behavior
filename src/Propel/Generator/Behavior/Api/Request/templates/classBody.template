@@ -8,11 +8,13 @@
     private $exposedRelations;
 
 	/**
+	 * @param bool $plural
+	 *
 	 * @return string
 	 */
-	public function buildNameOfParameterToAdd()
+	public function getNameOfParameterToAdd($plural = false)
 	{
-		return '<?php echo lcfirst($object) ?>';
+		return $plural ? '<?php echo lcfirst($objectPlural) ?>' : '<?php echo lcfirst($object) ?>';
 	}
 
     /**
