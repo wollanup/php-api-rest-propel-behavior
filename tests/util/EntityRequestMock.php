@@ -2,10 +2,10 @@
 namespace Eukles\Entity {
     
     use Eukles\Action\ActionInterface;
+    use Eukles\Container\ContainerInterface;
     use Propel\Runtime\ActiveQuery\ModelCriteria;
     use Propel\Runtime\ActiveRecord\ActiveRecordInterface;
     use Propel\Runtime\Map\TableMap;
-    use Psr\Container\ContainerInterface;
     
     class EntityRequestMock implements EntityRequestInterface
     {
@@ -50,13 +50,7 @@ namespace Eukles\Entity {
          *
          */
         public function beforeFetch(ModelCriteria $query) { }
-        
-        /**
-         *
-         * @return string
-         */
-        public function buildNameOfParameterToAdd() { }
-        
+    
         /**
          *
          * @return string|ActionInterface
@@ -105,6 +99,14 @@ namespace Eukles\Entity {
          * @return array List of modifiable properties
          */
         public function getModifiableProperties() { }
+    
+        /**
+         *
+         * @param bool $plural
+         *
+         * @return string
+         */
+        public function getNameOfParameterToAdd($plural = false) { }
         
         /**
          * @return mixed
