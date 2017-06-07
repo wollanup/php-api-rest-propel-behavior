@@ -7,6 +7,7 @@ namespace Eukles\Container {
     use Eukles\Service\ResponseBuilder\ResponseBuilderInterface;
     use Eukles\Service\ResponseFormatter\ResponseFormatterInterface;
     use Eukles\Service\RoutesClasses\RoutesClassesInterface;
+    use Eukles\Service\XssCleaner\XssCleanerInterface;
     use Eukles\Slim\Handlers\ActionErrorInterface;
     use Eukles\Slim\Handlers\EntityRequestErrorInterface;
     use Slim\Http\Request;
@@ -25,7 +26,6 @@ namespace Eukles\Container {
          */
         public function getActionErrorHandler()
         {
-            // TODO: Implement getActionErrorHandler() method.
         }
     
         /**
@@ -33,7 +33,6 @@ namespace Eukles\Container {
          */
         public function getEntityFactory()
         {
-            // TODO: Implement getEntityFactory() method.
         }
     
         /**
@@ -41,7 +40,6 @@ namespace Eukles\Container {
          */
         public function getEntityRequestErrorHandler()
         {
-            // TODO: Implement getEntityRequestErrorHandler() method.
         }
     
         /**
@@ -49,7 +47,6 @@ namespace Eukles\Container {
          */
         public function getRequest()
         {
-            // TODO: Implement getRequest() method.
         }
     
         /**
@@ -57,7 +54,6 @@ namespace Eukles\Container {
          */
         public function getRequestPagination()
         {
-            // TODO: Implement getRequestPagination() method.
         }
     
         /**
@@ -65,7 +61,6 @@ namespace Eukles\Container {
          */
         public function getRequestQueryModifier()
         {
-            // TODO: Implement getRequestQueryModifier() method.
         }
     
         /**
@@ -73,7 +68,6 @@ namespace Eukles\Container {
          */
         public function getResponseBuilder()
         {
-            // TODO: Implement getResponseBuilder() method.
         }
     
         /**
@@ -81,7 +75,6 @@ namespace Eukles\Container {
          */
         public function getResponseFormatter()
         {
-            // TODO: Implement getResponseFormatter() method.
         }
     
         /**
@@ -89,7 +82,6 @@ namespace Eukles\Container {
          */
         public function getRouter()
         {
-            // TODO: Implement getRouter() method.
         }
     
         /**
@@ -97,9 +89,15 @@ namespace Eukles\Container {
          */
         public function getRoutesClasses()
         {
-            // TODO: Implement getRoutesClasses() method.
         }
-        
+    
+        /**
+         * @return XssCleanerInterface
+         */
+        public function getXssCleaner()
+        {
+        }
+    
         /**
          * @inheritdoc
          */
