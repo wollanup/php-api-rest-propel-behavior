@@ -89,13 +89,6 @@ namespace Eukles\Entity {
         /**
          * None, all or partial list of properties
          *
-         * @return array List of hidden properties
-         */
-        public function getHiddenProperties() { }
-        
-        /**
-         * None, all or partial list of properties
-         *
          * @return array List of modifiable properties
          */
         public function getModifiableProperties() { }
