@@ -7,7 +7,7 @@ namespace Eukles\Entity {
     use Propel\Runtime\ActiveRecord\ActiveRecordInterface;
     use Propel\Runtime\Map\TableMap;
     
-    class EntityRequestMock implements EntityRequestInterface
+    abstract class EntityRequestMock implements EntityRequestInterface
     {
         
         /**

@@ -1,0 +1,103 @@
+    /**
+     * @var null|[]
+     */
+    private $exposedProperties;
+    /**
+     * @var null|[]
+     */
+    private $exposedRelations;
+
+	/**
+	 * @param bool $plural
+	 *
+	 * @return string
+	 */
+	public function getNameOfParameterToAdd($plural = false)
+	{
+		return $plural ? '<?php echo lcfirst($objectPlural) ?>' : '<?php echo lcfirst($object) ?>';
+	}
+
+    /**
+     *
+     * @return string|<?php echo $actionClassName . PHP_EOL ?>
+     */
+    public function getActionClassName()
+    {
+        return <?php echo $actionClassName ?>::class;
+    }
+
+    /**
+     * @return \Propel\Runtime\Map\TableMap
+     */
+    public function getTableMap()
+    {
+        return <?php echo $mapClassName ?>::getTableMap();
+    }
+
+    /**
+     * None, all or partial list of properties
+     *
+     * Adds visible fields, and remove hidden Properties
+     *
+     * @return array List of visible properties
+     */
+    public function getExposedProperties()
+    {
+        if(null === $this->exposedProperties) {
+	        $this->exposedProperties = array_diff($this->getVisibleFields(), $this->getHiddenProperties());
+	    }
+
+	    return $this->exposedProperties;
+    }
+
+    /**
+     * None, all or partial list of relations
+     *
+     * Adds visible relations, and remove hidden Properties
+     *
+     * @return array List of visible properties
+     */
+    public function getExposedRelations()
+    {
+        if(null === $this->exposedRelations) {
+            $this->exposedRelations = array_diff($this->getRelationsNames(), $this->getHiddenProperties());
+        }
+
+        return $this->exposedRelations;
+    }
+
+	/**
+	 * @return <?php echo $entityClassName . PHP_EOL ?>
+	 */
+	public function instantiateActiveRecord()
+	{
+		return new <?php echo $entityClassName ?>;
+	}
+
+    /**
+     * Converts an array of constant columns names into PHP names
+     *
+     * @param array $colNames
+     *
+     * @return array
+     * @throws \Propel\Runtime\Exception\PropelException
+     */
+    protected function convertsColNameToPhpName(array $colNames)
+    {
+        return array_flip(<?php echo $mapClassName ?>::translateFieldNames(
+            array_flip($colNames),
+            <?php echo $mapClassName ?>::TYPE_COLNAME,
+            <?php echo $mapClassName ?>::TYPE_PHPNAME)
+        );
+    }
+
+    /**
+     * All properties of ActiveRecord
+     *
+     * @return array
+     * @throws \Propel\Runtime\Exception\PropelException
+     */
+    protected function getAllProperties()
+    {
+        return <?php echo $mapClassName ?>::getFieldNames();
+    }
