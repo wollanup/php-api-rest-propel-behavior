@@ -26,26 +26,6 @@
         return <?php echo $actionClassName ?>::class;
     }
 
-	/**
-	 * None, all or partial list of properties
-	 *
-	 * @return array List of hidden properties
-	 */
-	public function getHiddenProperties()
-	{
-		return [];
-	}
-
-	/**
-	 * None, all or partial list of properties
-	 *
-	 * @return array List of modifiable properties
-	 */
-	public function getModifiableProperties()
-	{
-		return $this->getAllProperties();
-	}
-
     /**
      * @return \Propel\Runtime\Map\TableMap
      */
@@ -86,27 +66,6 @@
         return $this->exposedRelations;
     }
 
-
-	/**
-     * None, all or partial list of properties
-     *
-     * @return array List of writable properties
-     */
-    public function getRequiredWritableProperties()
-    {
-        return $this->getWritableProperties();
-    }
-
-	/**
-	 * None, all or partial list of properties
-     *
-	 * @return array List of writable properties
-	 */
-	public function getWritableProperties()
-	{
-		return $this->getAllProperties();
-	}
-
 	/**
 	 * @return <?php echo $entityClassName . PHP_EOL ?>
 	 */
@@ -141,14 +100,4 @@
     protected function getAllProperties()
     {
         return <?php echo $mapClassName ?>::getFieldNames();
-    }
-
-    /**
-     * None, all or partial list of fields
-     *
-     * @return array List of visible properties
-     */
-    protected function getVisibleFields()
-    {
-        return $this->getAllProperties();
     }
