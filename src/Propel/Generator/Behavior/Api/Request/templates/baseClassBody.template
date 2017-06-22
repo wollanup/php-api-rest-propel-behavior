@@ -1,11 +1,3 @@
-    /**
-     * @var null|[]
-     */
-    private $exposedProperties;
-    /**
-     * @var null|[]
-     */
-    private $exposedRelations;
 
 	/**
 	 * @param bool $plural
@@ -32,38 +24,6 @@
     public function getTableMap()
     {
         return <?php echo $mapClassName ?>::getTableMap();
-    }
-
-    /**
-     * None, all or partial list of properties
-     *
-     * Adds visible fields, and remove hidden Properties
-     *
-     * @return array List of visible properties
-     */
-    public function getExposedProperties()
-    {
-        if(null === $this->exposedProperties) {
-	        $this->exposedProperties = array_diff($this->getVisibleFields(), $this->getHiddenProperties());
-	    }
-
-	    return $this->exposedProperties;
-    }
-
-    /**
-     * None, all or partial list of relations
-     *
-     * Adds visible relations, and remove hidden Properties
-     *
-     * @return array List of visible properties
-     */
-    public function getExposedRelations()
-    {
-        if(null === $this->exposedRelations) {
-            $this->exposedRelations = array_diff($this->getRelationsNames(), $this->getHiddenProperties());
-        }
-
-        return $this->exposedRelations;
     }
 
 	/**
