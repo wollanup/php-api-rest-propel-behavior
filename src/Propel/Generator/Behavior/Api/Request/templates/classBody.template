@@ -1,143 +1,43 @@
-    /**
-     * @var null|[]
-     */
-    private $exposedProperties;
-    /**
-     * @var null|[]
-     */
-    private $exposedRelations;
-
-	/**
-	 * @param bool $plural
-	 *
-	 * @return string
-	 */
-	public function getNameOfParameterToAdd($plural = false)
-	{
-		return $plural ? '<?php echo lcfirst($objectPlural) ?>' : '<?php echo lcfirst($object) ?>';
-	}
 
     /**
+     * Set state of the object after request data hydration
      *
-     * @return string|<?php echo $actionClassName . PHP_EOL ?>
+     * @param ActiveRecordInterface|<?php echo $entityClassName ?> $obj
+     *
      */
-    public function getActionClassName()
+    public function afterCreate(ActiveRecordInterface $obj)
     {
-        return <?php echo $actionClassName ?>::class;
-    }
-
-	/**
-	 * None, all or partial list of properties
-	 *
-	 * @return array List of hidden properties
-	 */
-	public function getHiddenProperties()
-	{
-		return [];
-	}
-
-	/**
-	 * None, all or partial list of properties
-	 *
-	 * @return array List of modifiable properties
-	 */
-	public function getModifiableProperties()
-	{
-		return $this->getAllProperties();
-	}
-
-    /**
-     * @return \Propel\Runtime\Map\TableMap
-     */
-    public function getTableMap()
-    {
-        return <?php echo $mapClassName ?>::getTableMap();
     }
 
     /**
-     * None, all or partial list of properties
+     * Set state of the object after request data hydration
      *
-     * Adds visible fields, and remove hidden Properties
+     * @param ActiveRecordInterface|<?php echo $entityClassName ?> $obj
      *
-     * @return array List of visible properties
      */
-    public function getExposedProperties()
+    public function afterFetch(ActiveRecordInterface $obj)
     {
-        if(null === $this->exposedProperties) {
-	        $this->exposedProperties = array_diff($this->getVisibleFields(), $this->getHiddenProperties());
-	    }
-
-	    return $this->exposedProperties;
     }
 
     /**
-     * None, all or partial list of relations
+     * Set state of the object before request data hydration
      *
-     * Adds visible relations, and remove hidden Properties
+     * @param ActiveRecordInterface|<?php echo $entityClassName ?> $obj
      *
-     * @return array List of visible properties
      */
-    public function getExposedRelations()
+    public function beforeCreate(ActiveRecordInterface $obj)
     {
-        if(null === $this->exposedRelations) {
-            $this->exposedRelations = array_diff($this->getRelationsNames(), $this->getHiddenProperties());
-        }
-
-        return $this->exposedRelations;
-    }
-
-	/**
-	 * None, all or partial list of properties
-     *
-	 * @return array List of writable properties
-	 */
-	public function getWritableProperties()
-	{
-		return $this->getAllProperties();
-	}
-
-	/**
-	 * @return <?php echo $entityClassName . PHP_EOL ?>
-	 */
-	public function instantiateActiveRecord()
-	{
-		return new <?php echo $entityClassName ?>;
-	}
-
-    /**
-     * Converts an array of constant columns names into PHP names
-     *
-     * @param array $colNames
-     *
-     * @return array
-     * @throws \Propel\Runtime\Exception\PropelException
-     */
-    protected function convertsColNameToPhpName(array $colNames)
-    {
-        return array_flip(<?php echo $mapClassName ?>::translateFieldNames(
-            array_flip($colNames),
-            <?php echo $mapClassName ?>::TYPE_COLNAME,
-            <?php echo $mapClassName ?>::TYPE_PHPNAME)
-        );
     }
 
     /**
-     * All properties of ActiveRecord
+     * Set state of the object before request data hydration
      *
-     * @return array
-     * @throws \Propel\Runtime\Exception\PropelException
-     */
-    protected function getAllProperties()
-    {
-        return <?php echo $mapClassName ?>::getFieldNames();
-    }
-
-    /**
-     * None, all or partial list of fields
+     * @param ModelCriteria|<?php echo $entityClassName ?>Query $query
      *
-     * @return array List of visible properties
+     * @return ModelCriteria|<?php echo $entityClassName ?>Query
+     *
      */
-    protected function getVisibleFields()
+    public function beforeFetch(ModelCriteria $query)
     {
-        return $this->getAllProperties();
+        return $query;
     }

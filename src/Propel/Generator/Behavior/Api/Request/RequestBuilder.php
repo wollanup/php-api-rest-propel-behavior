@@ -9,18 +9,22 @@
 namespace Eukles\Propel\Generator\Behavior\Api\Request;
 
 use Propel\Generator\Builder\Om\AbstractOMBuilder;
+use Propel\Generator\Builder\Util\PropelTemplate;
 use Propel\Generator\Model\Table;
+use Propel\Runtime\ActiveQuery\ModelCriteria;
+use Propel\Runtime\ActiveRecord\ActiveRecordInterface;
 
 class RequestBuilder extends AbstractOMBuilder
 {
-
+    
     /**
      * @var bool
      */
     public $overwrite = false;
+    protected $entityClassName;
     protected $mapClassName;
     protected $parentClassName;
-
+    
     /**
      * RequestBuilder constructor.
      *
@@ -33,14 +37,17 @@ class RequestBuilder extends AbstractOMBuilder
     
         $this->mapClassName    = $this->declareClass($this->getTableMapClassName(true));
         $this->parentClassName = $this->declareClass(($this->getNamespace() ? ($this->getNamespace() . "\\") : '') . 'Base\\' . $this->getUnprefixedClassName());
+        $this->entityClassName = $this->declareClass($this->getStubObjectBuilder()->getClassName());
+        $this->declareClass(ActiveRecordInterface::class);
+        $this->declareClass(ModelCriteria::class);
     }
-
+    
     public function getNamespace()
     {
-
+    
         return $this->getTable()->getNamespace();
     }
-
+    
     /**
      * Returns the qualified (prefixed) classname that is being built by the current class.
      * This method must be implemented by child classes.
@@ -50,6 +57,16 @@ class RequestBuilder extends AbstractOMBuilder
     public function getUnprefixedClassName()
     {
         return $this->getStubObjectBuilder()->getUnprefixedClassName() . 'Request';
+    }
+    
+    public function renderTemplate($filename, $vars = [], $templateDir = '/templates/')
+    {
+        $filePath = __DIR__ . '/templates/' . $filename . '.template';
+        $template = new PropelTemplate();
+        $template->setTemplateFile($filePath);
+        $vars = array_merge($vars, ['behavior' => $this]);
+        
+        return $template->render($vars);
     }
     
     /**
@@ -64,6 +81,7 @@ class RequestBuilder extends AbstractOMBuilder
      */
     protected function addClassBody(&$script)
     {
+        $script .= $this->renderTemplate('classBody', ['entityClassName' => $this->entityClassName]);
     }
     
     /**

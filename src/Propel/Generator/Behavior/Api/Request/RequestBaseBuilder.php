@@ -13,6 +13,7 @@ use Propel\Generator\Builder\Om\AbstractOMBuilder;
 use Propel\Generator\Builder\Om\ClassTools;
 use Propel\Generator\Builder\Util\PropelTemplate;
 use Propel\Generator\Model\Table;
+use Propel\Runtime\Map\RelationMap;
 
 class RequestBaseBuilder extends AbstractOMBuilder
 {
@@ -21,7 +22,6 @@ class RequestBaseBuilder extends AbstractOMBuilder
     protected $entityClassName;
     protected $mapClassName;
     protected $shortParentName;
-
 
     /**
      * RequestBaseBuilder constructor.
@@ -32,8 +32,8 @@ class RequestBaseBuilder extends AbstractOMBuilder
     {
         parent::__construct($table);
         $this->setGeneratorConfig($this->getTable()->getGeneratorConfig());
-
-        $this->declareClass('Propel\\Runtime\\Map\\RelationMap');
+    
+        $this->declareClass(RelationMap::class);
         $this->shortParentName = $this->declareClass($this->getParameterFromApiBehavior(Api::PARAM_entity_request_class));
         $this->mapClassName    = $this->declareClass($this->getTableMapClassName(true));
         $this->entityClassName = $this->declareClass($this->getStubObjectBuilder()->getClassName());
@@ -91,7 +91,7 @@ class RequestBaseBuilder extends AbstractOMBuilder
      */
     protected function addClassBody(&$script)
     {
-        $script .= $this->renderTemplate('classBody',
+        $script .= $this->renderTemplate('baseClassBody',
             [
                 'object'          => $this->getObjectName(),
                 'objectPlural'    => $this->getPluralizer()->getPluralForm(lcfirst($this->getObjectName())),

@@ -47,19 +47,27 @@ class RequestBuilderTest extends TestCase
     {
         $table          = $this->builder->getDatabase()->getTable("api_test_10");
         $requestBuilder = new RequestBuilder($table);
-        
+    
         $expect = [
-            'Map'  => ['ApiTest10TableMap' => 'ApiTest10TableMap',],
-            'Base' => ['ApiTest10Request' => 'BaseApiTest10Request',],
+            'Map'                         => ['ApiTest10TableMap' => 'ApiTest10TableMap',],
+            'Base'                        => ['ApiTest10Request' => 'BaseApiTest10Request',],
+            ''                            => ["ApiTest10" => "ApiTest10"],
+            'Propel\Runtime\ActiveRecord' => ["ActiveRecordInterface" => "ActiveRecordInterface"],
+            'Propel\Runtime\ActiveQuery'  => ["ModelCriteria" => "ModelCriteria"],
         ];
+    
         $this->assertEquals($expect, $requestBuilder->getDeclaredClasses());
         
         $table          = $this->builder->getDatabase()->getTable("api_test_11");
         $requestBuilder = new RequestBuilder($table);
         
         $expect = [
-            'Prefix\\Package\\Map'  => ['ApiTest11TableMap' => 'ApiTest11TableMap',],
-            'Prefix\\Package\\Base' => ['ApiTest11Request' => 'BaseApiTest11Request',],
+            'Prefix\\Package\\Map'        => ['ApiTest11TableMap' => 'ApiTest11TableMap',],
+            'Prefix\\Package\\Base'       => ['ApiTest11Request' => 'BaseApiTest11Request',],
+            'Prefix\\Package'             => ['ApiTest11' => 'ApiTest11',],
+            'Propel\Runtime\ActiveRecord' => ["ActiveRecordInterface" => "ActiveRecordInterface"],
+            'Propel\Runtime\ActiveQuery'  => ["ModelCriteria" => "ModelCriteria"],
+
         ];
         $this->assertEquals($expect, $requestBuilder->getDeclaredClasses());
     }
