@@ -23,6 +23,8 @@
      */
     public function getTableMap()
     {
+        <?php echo $mapClassName ?>::buildTableMap();
+
         return <?php echo $mapClassName ?>::getTableMap();
     }
 
