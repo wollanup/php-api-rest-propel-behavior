@@ -1,16 +1,16 @@
 <?php
 namespace Eukles\Container {
     
+    use Eukles\Config\ConfigInterface;
     use Eukles\Entity\EntityFactoryInterface;
     use Eukles\Service\Pagination\RequestPaginationInterface;
     use Eukles\Service\QueryModifier\RequestQueryModifierInterface;
     use Eukles\Service\ResponseBuilder\ResponseBuilderInterface;
     use Eukles\Service\ResponseFormatter\ResponseFormatterInterface;
     use Eukles\Service\RoutesClasses\RoutesClassesInterface;
-    use Eukles\Service\XssCleaner\XssCleanerInterface;
     use Eukles\Slim\Handlers\ActionErrorInterface;
     use Eukles\Slim\Handlers\EntityRequestErrorInterface;
-    use Slim\Http\Request;
+    use Psr\Http\Message\ServerRequestInterface;
     use Slim\Interfaces\RouterInterface;
     
     class ContainerMock implements ContainerInterface
@@ -24,78 +24,89 @@ namespace Eukles\Container {
         /**
          * @return ActionErrorInterface
          */
-        public function getActionErrorHandler()
+        public function getActionErrorHandler(): ActionErrorInterface
         {
+            // TODO: Implement getActionErrorHandler() method.
+        }
+    
+        /**
+         * @return ConfigInterface
+         */
+        public function getConfig(): ConfigInterface
+        {
+            // TODO: Implement getConfig() method.
         }
     
         /**
          * @return EntityFactoryInterface
          */
-        public function getEntityFactory()
+        public function getEntityFactory(): EntityFactoryInterface
         {
+            // TODO: Implement getEntityFactory() method.
         }
     
         /**
          * @return EntityRequestErrorInterface
          */
-        public function getEntityRequestErrorHandler()
+        public function getEntityRequestErrorHandler(): EntityRequestErrorInterface
         {
+            // TODO: Implement getEntityRequestErrorHandler() method.
         }
     
         /**
-         * @return Request
+         * @return ServerRequestInterface
          */
-        public function getRequest()
+        public function getRequest(): ServerRequestInterface
         {
+            // TODO: Implement getRequest() method.
         }
     
         /**
          * @return RequestPaginationInterface
          */
-        public function getRequestPagination()
+        public function getRequestPagination(): RequestPaginationInterface
         {
+            // TODO: Implement getRequestPagination() method.
         }
     
         /**
          * @return RequestQueryModifierInterface
          */
-        public function getRequestQueryModifier()
+        public function getRequestQueryModifier(): RequestQueryModifierInterface
         {
+            // TODO: Implement getRequestQueryModifier() method.
         }
     
         /**
          * @return ResponseBuilderInterface
          */
-        public function getResponseBuilder()
+        public function getResponseBuilder(): ResponseBuilderInterface
         {
+            // TODO: Implement getResponseBuilder() method.
         }
     
         /**
          * @return ResponseFormatterInterface
          */
-        public function getResponseFormatter()
+        public function getResponseFormatter(): ResponseFormatterInterface
         {
+            // TODO: Implement getResponseFormatter() method.
         }
     
         /**
          * @return RouterInterface
          */
-        public function getRouter()
+        public function getRouter(): RouterInterface
         {
+            // TODO: Implement getRouter() method.
         }
     
         /**
          * @return RoutesClassesInterface
          */
-        public function getRoutesClasses()
+        public function getRoutesClasses(): RoutesClassesInterface
         {
-        }
-    
-        /**
-         * @return XssCleanerInterface
-         */
-        public function getXssCleaner()
-        {
+            // TODO: Implement getRoutesClasses() method.
         }
     
         /**
