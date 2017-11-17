@@ -1,6 +1,6 @@
 <?php
 namespace Eukles\Container {
-    
+
     use Eukles\Config\ConfigInterface;
     use Eukles\Entity\EntityFactoryInterface;
     use Eukles\Service\Pagination\RequestPaginationInterface;
@@ -10,17 +10,19 @@ namespace Eukles\Container {
     use Eukles\Service\RoutesClasses\RoutesClassesInterface;
     use Eukles\Slim\Handlers\ActionErrorInterface;
     use Eukles\Slim\Handlers\EntityRequestErrorInterface;
+    use Psr\Container\ContainerExceptionInterface;
+    use Psr\Container\NotFoundExceptionInterface;
+    use Psr\Http\Message\ResponseInterface;
     use Psr\Http\Message\ServerRequestInterface;
-    use Slim\Interfaces\RouterInterface;
-    
+
     class ContainerMock implements ContainerInterface
     {
-        
+
         /**
          * @inheritdoc
          */
-        public function get($id) { }
-    
+        public function has($id) { }
+
         /**
          * @return ActionErrorInterface
          */
@@ -28,7 +30,7 @@ namespace Eukles\Container {
         {
             // TODO: Implement getActionErrorHandler() method.
         }
-    
+
         /**
          * @return ConfigInterface
          */
@@ -36,7 +38,7 @@ namespace Eukles\Container {
         {
             // TODO: Implement getConfig() method.
         }
-    
+
         /**
          * @return EntityFactoryInterface
          */
@@ -44,7 +46,7 @@ namespace Eukles\Container {
         {
             // TODO: Implement getEntityFactory() method.
         }
-    
+
         /**
          * @return EntityRequestErrorInterface
          */
@@ -52,7 +54,7 @@ namespace Eukles\Container {
         {
             // TODO: Implement getEntityRequestErrorHandler() method.
         }
-    
+
         /**
          * @return ServerRequestInterface
          */
@@ -60,7 +62,7 @@ namespace Eukles\Container {
         {
             // TODO: Implement getRequest() method.
         }
-    
+
         /**
          * @return RequestPaginationInterface
          */
@@ -68,7 +70,7 @@ namespace Eukles\Container {
         {
             // TODO: Implement getRequestPagination() method.
         }
-    
+
         /**
          * @return RequestQueryModifierInterface
          */
@@ -76,7 +78,15 @@ namespace Eukles\Container {
         {
             // TODO: Implement getRequestQueryModifier() method.
         }
-    
+
+        /**
+         * @return ResponseInterface
+         */
+        public function getResponse(): ResponseInterface
+        {
+            // TODO: Implement getResponse() method.
+        }
+
         /**
          * @return ResponseBuilderInterface
          */
@@ -84,7 +94,7 @@ namespace Eukles\Container {
         {
             // TODO: Implement getResponseBuilder() method.
         }
-    
+
         /**
          * @return ResponseFormatterInterface
          */
@@ -92,15 +102,35 @@ namespace Eukles\Container {
         {
             // TODO: Implement getResponseFormatter() method.
         }
-    
+
         /**
-         * @return RouterInterface
+         * Result is populated in ActionStrategy and becomes available in middlewares post-app
+         *
+         * @return mixed
          */
-        public function getRouter(): RouterInterface
+        public function getResult()
+        {
+            // TODO: Implement getResult() method.
+        }
+
+        /**
+         * @param $result
+         *
+         * @return void
+         */
+        public function setResult($result)
+        {
+            // TODO: Implement setResult() method.
+        }
+
+        /**
+         * @return \Eukles\Service\Router\RouterInterface
+         */
+        public function getRouter(): \Eukles\Service\Router\RouterInterface
         {
             // TODO: Implement getRouter() method.
         }
-    
+
         /**
          * @return RoutesClassesInterface
          */
@@ -108,10 +138,20 @@ namespace Eukles\Container {
         {
             // TODO: Implement getRoutesClasses() method.
         }
-    
+
         /**
-         * @inheritdoc
+         * Finds an entry of the container by its identifier and returns it.
+         *
+         * @param string $id Identifier of the entry to look for.
+         *
+         * @throws NotFoundExceptionInterface  No entry was found for **this** identifier.
+         * @throws ContainerExceptionInterface Error while retrieving the entry.
+         *
+         * @return mixed Entry.
          */
-        public function has($id) { }
+        public function get($id)
+        {
+            // TODO: Implement get() method.
+        }
     }
 }
