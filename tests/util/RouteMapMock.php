@@ -1,4 +1,5 @@
 <?php
+
 namespace Eukles\RouteMap {
     
     use Eukles\Action\ActionInterface;
@@ -8,9 +9,9 @@ namespace Eukles\RouteMap {
     
     class RouteMapMock implements RouteMapInterface
     {
-
+    
         protected $container;
-
+    
         public function __construct(ContainerInterface $container)
         {
             $this->container = $container;
@@ -24,10 +25,10 @@ namespace Eukles\RouteMap {
          *
          * @return RouteInterface
          */
-        public function add($method, $pattern)
+        public function add($method, $pattern): RouteInterface
         {
         }
-
+    
         public function current() { }
     
         /**
@@ -37,7 +38,7 @@ namespace Eukles\RouteMap {
          *
          * @return RouteInterface
          */
-        public function delete($pattern)
+        public function delete($pattern): RouteInterface
         {
         }
     
@@ -48,47 +49,73 @@ namespace Eukles\RouteMap {
          *
          * @return RouteInterface
          */
-        public function get($pattern)
+        public function get($pattern): RouteInterface
         {
         }
     
         /**
          * @return string|ActionInterface
          */
-        public function getActionClass()
-        {
-        }
-
-        public function getContainer() { }
-
-        public function getPackage() { }
-    
-        /**
-         * @return string
-         */
-        public function getPrefix()
+        public function getActionClass(): string
         {
         }
     
         /**
+         * @return ContainerInterface
+         */
+        public function getContainer(): ContainerInterface
+        {
+            // TODO: Implement getContainer() method.
+        }
+    
+        /**
+         * @param ContainerInterface $c
+         *
+         * @return RouteMapInterface
+         */
+        public function setContainer(ContainerInterface $c): RouteMapInterface
+        {
+            // TODO: Implement setContainer() method.
+        }
+        
+        /**
          * @return string
          */
-        public function getResource()
+        public function getPackage(): string
         {
+            // TODO: Implement getPackage() method.
+        }
+    
+        /**
+         * @return string
+         */
+        public function getPrefix(): string
+        {
+            // TODO: Implement getPrefix() method.
+        }
+    
+        /**
+         * @return string
+         */
+        public function getResource(): string
+        {
+            // TODO: Implement getResource() method.
         }
     
         /**
          * @return bool
          */
-        public function hasPackage()
+        public function hasPackage(): bool
         {
+            // TODO: Implement hasPackage() method.
         }
     
         /**
          * @return bool
          */
-        public function isSubResourceOfPackage()
+        public function isSubResourceOfPackage(): bool
         {
+            // TODO: Implement isSubResourceOfPackage() method.
         }
     
         public function key() { }
@@ -102,8 +129,9 @@ namespace Eukles\RouteMap {
          *
          * @return RouteInterface
          */
-        public function patch($pattern)
+        public function patch($pattern): RouteInterface
         {
+            // TODO: Implement patch() method.
         }
     
         /**
@@ -113,8 +141,9 @@ namespace Eukles\RouteMap {
          *
          * @return RouteInterface
          */
-        public function post($pattern)
+        public function post($pattern): RouteInterface
         {
+            // TODO: Implement post() method.
         }
     
         /**
@@ -124,8 +153,9 @@ namespace Eukles\RouteMap {
          *
          * @return RouteInterface
          */
-        public function put($pattern)
+        public function put($pattern): RouteInterface
         {
+            // TODO: Implement put() method.
         }
     
         public function registerRoutes(RouterInterface $router) { }
