@@ -19,6 +19,15 @@
     }
 
     /**
+     *
+     * @return string|<?php echo $entityClassName . PHP_EOL ?>
+     */
+    public function getActiveRecordClassName()
+    {
+       return <?php echo $entityClassName ?>::class;
+    }
+
+    /**
      * @return \Propel\Runtime\Map\TableMap
      */
     public function getTableMap()
