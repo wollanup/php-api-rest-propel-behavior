@@ -26,7 +26,7 @@
   },
   "require-dev": {
     "ext-sqlite3": "*",
-    "wollanup/php-api-rest": "dev-master",
+    "wollanup/php-api-rest": "^2.3",
     "phpunit/phpunit": "^6.0",
     "propel/propel": "~2.0@dev",
     "slim/slim": "3.*"
