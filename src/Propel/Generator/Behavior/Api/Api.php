@@ -44,7 +44,24 @@ class Api extends Behavior
      * @var ObjectBuilder
      */
     private $builder;
-    
+
+    public function modifyDatabase()
+    {
+        foreach ($this->getDatabase()->getTables() as $table) {
+            if ($table->hasBehavior($this->getId())) {
+                // don't add the same behavior twice
+                continue;
+            }
+
+            if (strpos($table->getName(), "_i18n")) {
+                continue;
+            }
+
+            $b = clone $this;
+            $table->addBehavior($b);
+        }
+    }
+
     public function hasAdditionalBuilders()
     {
         return $this->getParameter(self::PARAM_SKIP_CLASSES) !== "true";
@@ -74,7 +91,7 @@ public function exportPopulatedRelations()
 ";
         if ($hasFks) {
             foreach ($fks as $fk) {
-    
+
                 $script .= "
     if(null !== \$this->{$builder->getFKVarName($fk)}){
         \$r['{$this->getRelationName($fk->getPhpName(), $fk->getForeignTable(), false)}'] = \$this->{$builder->getFKVarName($fk)};
@@ -101,10 +118,10 @@ public function exportPopulatedRelations()
     return \$r;
 }
 ";
-    
+
         return $script;
     }
-    
+
     /**
      * @param       $phpName
      * @param Table $table
@@ -117,11 +134,11 @@ public function exportPopulatedRelations()
         if ($phpName == "") {
             $phpName = $table->getPhpName();
         }
-    
+
         if ($plural) {
             $phpName = $this->builder->getPluralizer()->getPluralForm($phpName);
         }
-    
+
         return $phpName;
     }
 }
