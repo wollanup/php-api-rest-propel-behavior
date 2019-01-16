@@ -21,16 +21,6 @@ class Api extends Behavior
     const PARAM_ROUTES_PREFIX = 'auto_add_routes_prefix';
     const PARAM_SKIP_CLASSES = 'skip_classes';
     /**
-     * @var array
-     */
-    protected $additionalBuilders = [
-        'Eukles\\Propel\\Generator\\Behavior\\Api\\Request\\RequestBaseBuilder',
-        'Eukles\\Propel\\Generator\\Behavior\\Api\\Request\\RequestBuilder',
-        'Eukles\\Propel\\Generator\\Behavior\\Api\\Action\\ActionBaseBuilder',
-        'Eukles\\Propel\\Generator\\Behavior\\Api\\Action\\ActionBuilder',
-        'Eukles\\Propel\\Generator\\Behavior\\Api\\RouteMap\\RouteMapBuilder',
-    ];
-    /**
      * @var array Parameters
      */
     protected $parameters = [
@@ -65,6 +55,27 @@ class Api extends Behavior
     public function hasAdditionalBuilders()
     {
         return $this->getParameter(self::PARAM_SKIP_CLASSES) !== "true";
+    }
+
+    public function getAdditionalBuilders()
+    {
+        $builders = [];
+        if ($this->getParameter(self::PARAM_SKIP_CLASSES) === "true") {
+            return [];
+        }
+        if ($this->getParameter(self::PARAM_action_class) !== "false") {
+            $builders[] = 'Eukles\\Propel\\Generator\\Behavior\\Api\\Action\\ActionBaseBuilder';
+            $builders[] = 'Eukles\\Propel\\Generator\\Behavior\\Api\\Action\\ActionBuilder';
+        }
+        if ($this->getParameter(self::PARAM_entity_request_class) !== "false") {
+            $builders[] = 'Eukles\\Propel\\Generator\\Behavior\\Api\\Request\\RequestBaseBuilder';
+            $builders[] = 'Eukles\\Propel\\Generator\\Behavior\\Api\\Request\\RequestBuilder';
+        }
+        if ($this->getParameter(self::PARAM_route_map_class) !== "false") {
+            $builders[] = 'Eukles\\Propel\\Generator\\Behavior\\Api\\RouteMap\\RouteMapBuilder';
+        }
+
+        return $builders;
     }
 
     /**
