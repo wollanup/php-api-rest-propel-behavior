@@ -3,8 +3,8 @@ namespace Eukles\Container {
 
     use Eukles\Config\ConfigInterface;
     use Eukles\Entity\EntityFactoryInterface;
-    use Eukles\Service\Pagination\RequestPaginationInterface;
     use Eukles\Service\QueryModifier\RequestQueryModifierInterface;
+    use Eukles\Service\Request\Pagination\RequestPaginationInterface;
     use Eukles\Service\ResponseBuilder\ResponseBuilderInterface;
     use Eukles\Service\ResponseFormatter\ResponseFormatterInterface;
     use Eukles\Service\RoutesClasses\RoutesClassesInterface;
