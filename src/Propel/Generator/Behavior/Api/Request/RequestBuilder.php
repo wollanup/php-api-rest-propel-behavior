@@ -16,7 +16,7 @@ use Propel\Runtime\ActiveRecord\ActiveRecordInterface;
 
 class RequestBuilder extends AbstractOMBuilder
 {
-    
+
     /**
      * @var bool
      */
@@ -24,7 +24,7 @@ class RequestBuilder extends AbstractOMBuilder
     protected $entityClassName;
     protected $mapClassName;
     protected $parentClassName;
-    
+
     /**
      * RequestBuilder constructor.
      *
@@ -34,20 +34,20 @@ class RequestBuilder extends AbstractOMBuilder
     {
         parent::__construct($table);
         $this->setGeneratorConfig($this->getTable()->getGeneratorConfig());
-    
+
         $this->mapClassName    = $this->declareClass($this->getTableMapClassName(true));
         $this->parentClassName = $this->declareClass(($this->getNamespace() ? ($this->getNamespace() . "\\") : '') . 'Base\\' . $this->getUnprefixedClassName());
         $this->entityClassName = $this->declareClass($this->getStubObjectBuilder()->getClassName());
         $this->declareClass(ActiveRecordInterface::class);
         $this->declareClass(ModelCriteria::class);
     }
-    
+
     public function getNamespace()
     {
-    
+
         return $this->getTable()->getNamespace();
     }
-    
+
     /**
      * Returns the qualified (prefixed) classname that is being built by the current class.
      * This method must be implemented by child classes.
@@ -58,7 +58,7 @@ class RequestBuilder extends AbstractOMBuilder
     {
         return $this->getStubObjectBuilder()->getUnprefixedClassName() . 'Request';
     }
-    
+
     /**
      * Closes class.
      *
@@ -66,11 +66,11 @@ class RequestBuilder extends AbstractOMBuilder
      */
     protected function addClassClose(&$script)
     {
-    
+
         $script .= "
 }";
     }
-    
+
     /**
      * Opens class.
      *
@@ -91,4 +91,20 @@ class {$this->getUnprefixedClassName()} extends {$this->parentClassName}
 {
 ";
     }
+
+    /**
+     * This method adds the contents of the generated class to the script.
+     *
+     * This method is and should be overridden by the subclasses.
+     *
+     * Hint: Override this method in your subclass if you want to reorganize or
+     * drastically change the contents of the generated object class.
+     *
+     * @param string &$script The script will be modified in this method.
+     */
+    protected function addClassBody(&$script)
+    {
+
+    }
+
 }
