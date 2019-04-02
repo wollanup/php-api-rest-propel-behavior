@@ -4,7 +4,7 @@
 	 *
 	 * @return string
 	 */
-	public function getNameOfParameterToAdd($plural = false)
+	public static function getNameOfParameterToAdd($plural = false)
 	{
 		return $plural ? '<?php echo lcfirst($objectPlural) ?>' : '<?php echo lcfirst($object) ?>';
 	}
