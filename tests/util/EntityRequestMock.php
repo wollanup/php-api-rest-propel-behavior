@@ -7,6 +7,7 @@ use Eukles\Container\ContainerInterface;
 use Propel\Runtime\ActiveQuery\ModelCriteria;
 use Propel\Runtime\ActiveRecord\ActiveRecordInterface;
 use Propel\Runtime\Map\TableMap;
+use Psr\Http\Message\RequestInterface;
 
 abstract class EntityRequestMock implements EntityRequestInterface
 {
@@ -14,17 +15,19 @@ abstract class EntityRequestMock implements EntityRequestInterface
     /**
      * ActiveRecordRequestTrait constructor.
      *
-     * @param ContainerInterface $c
+     * @param RequestInterface $request
      */
-    public function __construct(ContainerInterface $c) { }
+    public function __construct(RequestInterface $request)
+    {
+    }
 
     /**
      * Set state of the object after request data hydration
      *
      * @param ActiveRecordInterface $obj
-     *
+     * @param RequestInterface $r
      */
-    public function afterCreate(ActiveRecordInterface $obj)
+    public function afterCreate(ActiveRecordInterface $obj, RequestInterface $r)
     {
         // TODO: Implement afterCreate() method.
     }
@@ -33,9 +36,9 @@ abstract class EntityRequestMock implements EntityRequestInterface
      * Set state of the object after request data hydration
      *
      * @param ActiveRecordInterface $obj
-     *
+     * @param RequestInterface $r
      */
-    public function afterFetch(ActiveRecordInterface $obj)
+    public function afterFetch(ActiveRecordInterface $obj, RequestInterface $r)
     {
         // TODO: Implement afterFetch() method.
     }
@@ -44,9 +47,9 @@ abstract class EntityRequestMock implements EntityRequestInterface
      * Set state of the object before request data hydration
      *
      * @param ActiveRecordInterface $obj
-     *
+     * @param RequestInterface $r
      */
-    public function beforeCreate(ActiveRecordInterface $obj)
+    public function beforeCreate(ActiveRecordInterface $obj, RequestInterface $r)
     {
         // TODO: Implement beforeCreate() method.
     }
@@ -56,10 +59,10 @@ abstract class EntityRequestMock implements EntityRequestInterface
      *
      * @param ModelCriteria $query
      *
-     * @return ModelCriteria
-     *
+     * @param RequestInterface $r
+     * @return void
      */
-    public function beforeFetch(ModelCriteria $query)
+    public function beforeFetch(ModelCriteria $query, RequestInterface $r)
     {
         // TODO: Implement beforeFetch() method.
     }
@@ -132,7 +135,7 @@ abstract class EntityRequestMock implements EntityRequestInterface
      *
      * @return string
      */
-    public function getNameOfParameterToAdd($plural = false)
+    public static function getNameOfParameterToAdd($plural = false)
     {
         // TODO: Implement getNameOfParameterToAdd() method.
     }
@@ -298,6 +301,41 @@ abstract class EntityRequestMock implements EntityRequestInterface
     public function setPrimaryKey($pk)
     {
         // TODO: Implement setPrimaryKey() method.
+    }
+
+    /**
+     * @return RequestInterface
+     */
+    public function getRequest(): RequestInterface
+    {
+        // TODO: Implement getRequest() method.
+    }
+
+    /**
+     * @param RequestInterface $request
+     * @return EntityRequestAbstract
+     */
+    public function setRequest(RequestInterface $request): EntityRequestAbstract
+    {
+        // TODO: Implement setRequest() method.
+    }
+
+    /**
+     * @param \Psr\Container\ContainerInterface|ContainerInterface $c
+     *
+     * @return mixed
+     */
+    public function setContainer(\Psr\Container\ContainerInterface $c)
+    {
+        // TODO: Implement setContainer() method.
+    }
+
+    /**
+     * @return ActiveRecordInterface|string
+     */
+    public function getActiveRecordClassName()
+    {
+        // TODO: Implement getActiveRecordClassName() method.
     }
 }
 

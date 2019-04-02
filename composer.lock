@@ -2709,16 +2709,16 @@
         },
         {
             "name": "wollanup/php-api-rest",
-            "version": "5.0",
+            "version": "5.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wollanup/php-api-rest.git",
-                "reference": "a8a22eb6ed94bf6ac535253e531e924f2b0c5548"
+                "reference": "4f23de8080dccfac5622488eb4d6b254106a4de6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wollanup/php-api-rest/zipball/a8a22eb6ed94bf6ac535253e531e924f2b0c5548",
-                "reference": "a8a22eb6ed94bf6ac535253e531e924f2b0c5548",
+                "url": "https://api.github.com/repos/wollanup/php-api-rest/zipball/4f23de8080dccfac5622488eb4d6b254106a4de6",
+                "reference": "4f23de8080dccfac5622488eb4d6b254106a4de6",
                 "shasum": ""
             },
             "require": {
@@ -2755,7 +2755,7 @@
                 }
             ],
             "description": "PHP API REST",
-            "time": "2019-04-02T09:40:33+00:00"
+            "time": "2019-04-02T12:50:26+00:00"
         },
         {
             "name": "wollanup/php-api-rest-utils",

@@ -5,19 +5,19 @@ namespace Eukles\Action;
 use Eukles\Service\QueryModifier\QueryModifierInterface;
 use Propel\Runtime\ActiveQuery\ModelCriteria;
 use Psr\Container\ContainerInterface;
+use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
 
 class ActionMock implements ActionInterface
 {
-    
+
     /**
      * ActionInterface constructor.
      *
      * @param ContainerInterface $c
      */
     public function __construct(ContainerInterface $c) { }
-    
+
     /**
      * Action factory
      *
@@ -25,21 +25,21 @@ class ActionMock implements ActionInterface
      *
      * @return ActionInterface
      */
-    public static function create(ContainerInterface $c): ActionInterface
+    public static function create(ContainerInterface $c)
     {
         // TODO: Implement create() method.
     }
-    
+
     /**
      * @param QueryModifierInterface $qm
      *
      * @return ModelCriteria
      */
-    public function createQuery(QueryModifierInterface $qm = null): ModelCriteria
+    public function createQuery(QueryModifierInterface $qm = null)
     {
         // TODO: Implement createQuery() method.
     }
-    
+
     /**
      * @return ContainerInterface
      */
@@ -47,15 +47,15 @@ class ActionMock implements ActionInterface
     {
         // TODO: Implement getContainer() method.
     }
-    
+
     /**
-     * @return ServerRequestInterface
+     * @return RequestInterface
      */
-    public function getRequest(): ServerRequestInterface
+    public function getRequest(): RequestInterface
     {
         // TODO: Implement getRequest() method.
     }
-    
+
     /**
      * @return ResponseInterface
      */
@@ -63,17 +63,17 @@ class ActionMock implements ActionInterface
     {
         // TODO: Implement getResponse() method.
     }
-    
+
     /**
-     * @param ServerRequestInterface $serverRequest
+     * @param RequestInterface $server
      *
      * @return ActionInterface
      */
-    public function setRequest(ServerRequestInterface $serverRequest): ActionInterface
+    public function setRequest(RequestInterface $server): ActionInterface
     {
         // TODO: Implement setRequest() method.
     }
-    
+
     /**
      * @param ResponseInterface $response
      *
