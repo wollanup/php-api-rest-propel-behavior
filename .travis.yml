@@ -3,18 +3,12 @@ language: php
 php:
     - 7.0
     - 7.1
-    - hhvm
-
-matrix:
-    allow_failures:
-        - php: hhvm
 
 notifications:
     email: true
 
 before_script:
-    - composer require phpunit/phpunit
-    - composer update
+    - composer install
 
 script:
     - vendor/bin/phpunit --coverage-clover=coverage.xml
