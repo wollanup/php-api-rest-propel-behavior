@@ -90,7 +90,7 @@
      *
      * @return array List of hidden properties
      */
-    protected function getHiddenProperties()
+    protected function getHiddenFieldsAndRelations()
     {
         return [];
     }
