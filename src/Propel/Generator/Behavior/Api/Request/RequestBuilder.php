@@ -59,31 +59,6 @@ class RequestBuilder extends AbstractOMBuilder
         return $this->getStubObjectBuilder()->getUnprefixedClassName() . 'Request';
     }
     
-    public function renderTemplate($filename, $vars = [], $templateDir = '/templates/')
-    {
-        $filePath = __DIR__ . '/templates/' . $filename . '.template';
-        $template = new PropelTemplate();
-        $template->setTemplateFile($filePath);
-        $vars = array_merge($vars, ['behavior' => $this]);
-        
-        return $template->render($vars);
-    }
-    
-    /**
-     * This method adds the contents of the generated class to the script.
-     *
-     * This method is and should be overridden by the subclasses.
-     *
-     * Hint: Override this method in your subclass if you want to reorganize or
-     * drastically change the contents of the generated object class.
-     *
-     * @param string &$script The script will be modified in this method.
-     */
-    protected function addClassBody(&$script)
-    {
-        $script .= $this->renderTemplate('classBody', ['entityClassName' => $this->entityClassName]);
-    }
-    
     /**
      * Closes class.
      *
